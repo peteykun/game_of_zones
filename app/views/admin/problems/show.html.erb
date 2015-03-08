@@ -1,0 +1,57 @@
+<h1>Viewing Problem</h1>
+<hr>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @problem.name %>
+</p>
+
+<p>
+  <strong>Difficulty:</strong>
+  <%= @problem.difficulty %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <% if @problem.region == nil %>
+  Nowhere
+  <% else %>
+  <%= link_to @problem.region.name, admin_region_path(@problem.region) %>
+  <% end %>
+</p>
+
+<hr>
+
+<p>
+  <strong>Statement:</strong>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= raw @problem.statement %>
+    </div>
+  </div>
+</p>
+
+<p>
+  <strong>Sample input:</strong>
+  <pre><%= @problem.sample_input %></pre>
+</p>
+
+<p>
+  <strong>Sample output:</strong>
+  <pre><%= @problem.sample_output %></pre>
+</p>
+
+<hr>
+
+<p>
+  <strong>Test Cases:</strong>
+  <%= link_to 'Click here to view test cases', controller: "test_cases", action: "problem", id: @problem.id %>
+</p>
+
+
+<br>
+
+<%= link_to 'Edit Problem', edit_admin_problem_path(@problem), class: 'btn btn-default' %>
+<%= link_to 'Back to list of Problems', admin_problems_path, class: 'btn btn-default' %>

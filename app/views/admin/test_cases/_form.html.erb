@@ -1,0 +1,33 @@
+<%= form_for([:admin, @test_case]) do |f| %>
+  <% if @test_case.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@test_case.errors.count, "error") %> prohibited this test case from being saved:</h2>
+
+      <ul>
+      <% @test_case.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :input %><br>
+    Each test case may span any number of lines.</p>
+    <%= f.text_area :input, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :output %><br>
+    <p>Each output span any number of lines.</p>
+    <%= f.text_area :output, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <%= f.hidden_field :problem_id %>
+
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

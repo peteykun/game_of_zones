@@ -1,0 +1,74 @@
+<%= form_for([:admin, @problem]) do |f| %>
+  <% if @problem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+
+      <ul>
+      <% @problem.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :difficulty %><br>
+    <p>Difficulty is used to decide at what level the problem will appear. Lower is easier.</p>
+    <%= f.number_field :difficulty, class: 'form-control' %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :statement %><br>
+    <p>Use HTML to format your problem statement. You can preview what it looks like on the <%= link_to 'View Problem', [:admin, @problem] %> page.</p>
+    <%= f.text_area :statement, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :sample_input %><br>
+    <p>The first line of the input must be <b>T</b>, the number of test cases. This must be followed by <b>T</b> test cases.<br>
+    Each test case must start on a new line but may span any number of lines.</p>
+    <%= f.text_area :sample_input, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :sample_output %><br>
+    <p>The output of all the sample input test cases concatenated together.<br>
+      The output for each test case must start on a new line but may span any number of lines.</p>
+    <%= f.text_area :sample_output, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :test_case_inputs %><br>
+    <p>Enter a list of test case input, each separated by a semicolon <kbd>;</kbd>.</p>
+    <%= f.text_area :test_case_inputs, value: @test_case_inputs, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :test_case_outputs %><br>
+    <p>Enter a list of test case outputs, each separated by a semicolon.</p>
+    <%= f.text_area :test_case_outputs, value: @test_case_outputs, class: 'form-control', rows: 6 %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :region_id %><br>
+    <p>Leave this blank for automatic allocation once the contest begins.</p>
+    <%= f.collection_select :region_id, Region.order(:name), :id, :name, {include_blank: true}, {class: 'form-control'} %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

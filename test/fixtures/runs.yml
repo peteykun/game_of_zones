@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  problem_id: 1
+  code: MyText
+  input: MyText
+  expected_output: MyText
+  output: MyText
+  success: false
+  timestamp: 2015-03-07 16:30:58
+
+two:
+  problem_id: 1
+  code: MyText
+  input: MyText
+  expected_output: MyText
+  output: MyText
+  success: false
+  timestamp: 2015-03-07 16:30:58

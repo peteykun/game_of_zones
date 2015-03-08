@@ -1,0 +1,23 @@
+<h1>Viewing Region</h1>
+<hr>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @region.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <% if @region.user == nil %>
+  Nobody
+  <% else %>
+  <%= link_to @region.user.email, admin_user_path(@region.user) %>
+  <% end %>
+</p>
+
+<br>
+
+<%= link_to 'Edit Region', edit_admin_region_path(@region), class: 'btn btn-default' %>
+<%= link_to 'Back to list of Regions', admin_regions_path, class: 'btn btn-default' %>

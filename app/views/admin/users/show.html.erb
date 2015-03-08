@@ -1,0 +1,19 @@
+<h1>Viewing User</h1>
+<hr>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
+</p>
+
+<p>
+  <strong>Is admin:</strong>
+  <%= @user.is_admin %>
+</p>
+
+<br>
+
+<%= link_to 'Edit User', edit_admin_user_path(@user), class: 'btn btn-default' %>
+<%= link_to 'Back to list of Users', admin_users_path, class: 'btn btn-default' %>

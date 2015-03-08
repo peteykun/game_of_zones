@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  difficulty: 1
+  statement: MyText
+  sample_input: MyText
+  sample_output: MyText
+  region_id: 1
+
+two:
+  difficulty: 1
+  statement: MyText
+  sample_input: MyText
+  sample_output: MyText
+  region_id: 1

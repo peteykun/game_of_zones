@@ -1,0 +1,32 @@
+<h1>List of Problems</h1>
+<hr>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Difficulty</th>
+      <th>Region</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @problems.each do |problem| %>
+      <tr>
+        <td><%= problem.name %></td>
+        <td><%= problem.difficulty %></td>
+        <td><% if problem.region == nil %>Nowhere<% else %><%= problem.region.name %><% end %></td>
+        <td>
+          <%= link_to controller: "test_cases", action: "problem", id: problem.id do %>
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem', new_admin_problem_path, class: 'btn btn-default' %>
