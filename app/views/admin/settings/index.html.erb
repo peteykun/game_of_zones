@@ -1,0 +1,44 @@
+<h1>Settings</h1>
+<hr>
+
+<div class="alert alert-warning" role="alert">
+  <b>Warning!</b> You must restart the app for changes to take effect.
+</div>
+
+<%= form_tag("/admin/settings", method: 'post') do %>
+
+<br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Test case limit</b>
+    <p>The number of test cases to be used for checking programs submitted.<br>
+      If fewer test cases are available than this limit, all available test cases will be used instead.<br><br>
+      <i>Current value:</i> <%= @current_test_case_limit %> test cases</p>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <br>
+    <%= number_field_tag :test_case_limit, @test_case_limit, class: 'form-control' %>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Submission time limit</b>
+    <p>The amount of time allowed to elapse between downloading a test set and output submission.<br>
+      Specify in number of seconds allowed (eg. 5 minutes = 300).<br><br>
+      <i>Current value:</i> <%= @current_submission_time_limit %> seconds</p>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <br>
+    <%= number_field_tag :submission_time_limit, @submission_time_limit, class: 'form-control' %>
+  </div>
+</div>
+
+<br><br>
+
+<%= submit_tag 'Update Settings (requires restart)', class: 'btn btn-success' %>
+
+<% end %>

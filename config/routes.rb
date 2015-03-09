@@ -64,6 +64,8 @@ Rails.application.routes.draw do
     resources :runs
     resources :users
     resources :test_cases
+    get  'settings', to: 'settings#index'
+    post 'settings', to: 'settings#update'
 
     get 'test_cases/problem/:id', to: 'test_cases#problem'
   end

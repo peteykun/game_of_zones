@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308121747) do
+ActiveRecord::Schema.define(version: 20150309102409) do
 
   create_table "admin_problems", force: true do |t|
     t.datetime "created_at"
