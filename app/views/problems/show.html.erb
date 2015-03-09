@@ -1,0 +1,27 @@
+<h1><%= @problem.name %></h1>
+<hr>
+
+<%= raw @problem.statement %>
+
+<br>
+
+<h4>Sample Input</h4>
+<pre><%= @problem.sample_input%></pre>
+
+<br>
+
+<h4>Sample Output</h4>
+<pre><%= @problem.sample_output%></pre>
+
+<br>
+
+<h4>Submission Area</h4>
+<%= link_to "Request input set", request_input_problem_path(@problem), class: 'btn btn-primary', id: 'submission-button' %>
+
+<script type="text/javascript">
+  $(function() {
+    $('a#submission-button').on('click', function() {
+      countdown(30, $('a#submission-button'));
+    });
+  });
+</script>

@@ -67,4 +67,13 @@ Rails.application.routes.draw do
 
     get 'test_cases/problem/:id', to: 'test_cases#problem'
   end
+
+  resources :problems do
+    member do
+      get  'request_input'
+      post 'submit_output'
+    end
+  end
+
+  resources :users
 end

@@ -7,7 +7,7 @@
       <th>Name</th>
       <th>Difficulty</th>
       <th>Region</th>
-      <th></th>
+      <th width="10%">Controls</th>
     </tr>
   </thead>
 
@@ -19,7 +19,7 @@
         <td><% if problem.region == nil %>Nowhere<% else %><%= problem.region.name %><% end %></td>
         <td>
           <%= link_to controller: "test_cases", action: "problem", id: problem.id do %>
-          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> View
           <% end %>
         </td>
       </tr>

@@ -4,11 +4,6 @@ class Run < ActiveRecord::Base
 
 	after_initialize      :default_values
 
-	private
-		def default_values
-			self.success ||= false
-		end
-
   def generate_test_set(number_of_test_cases)
     test_set    = self.problem.test_cases.sample(number_of_test_cases)
 
@@ -18,6 +13,11 @@ class Run < ActiveRecord::Base
     self.input           = number_of_test_cases.to_s + "\n" + input_set.join("\n")
     self.expected_output = number_of_test_cases.to_s + "\n" + output_set.join("\n")
   end
+
+	private
+		def default_values
+			self.success ||= false
+		end
 
   def test
     self.success = check

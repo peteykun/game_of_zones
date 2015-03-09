@@ -7,6 +7,16 @@ class Problem < ActiveRecord::Base
 
   attr_accessor :test_case_inputs, :test_case_outputs
 
+  def generate_new_run(user)
+    run = Run.create
+    self.runs << run
+    user.runs << run
+    run.generate_test_set(10)
+    run.save
+
+    return run
+  end
+
   def test_case_inputs
     test_set    = self.test_cases
 
