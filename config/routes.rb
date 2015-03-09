@@ -58,6 +58,9 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  root 'problems#index'
+  get '/admin', to: redirect('/admin/problems')
+
   namespace :admin do
     resources :problems
     resources :regions
