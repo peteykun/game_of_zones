@@ -2,7 +2,7 @@ class Run < ActiveRecord::Base
   belongs_to            :problem
   belongs_to            :user
 
-	after_initialize      :default_values
+	before_create         :default_values
 
   def generate_test_set(number_of_test_cases)
     test_set    = self.problem.test_cases.sample(number_of_test_cases)
@@ -16,7 +16,8 @@ class Run < ActiveRecord::Base
 
 	private
 		def default_values
-			self.success ||= false
+			self.success   = false
+      self.timestamp = Time.now
 		end
 
   def test

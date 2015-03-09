@@ -21,7 +21,11 @@
 <script type="text/javascript">
   $(function() {
     $('a#submission-button').on('click', function() {
-      countdown(30, $('a#submission-button'));
+      countdown(<%= @submission_time_limit %>, $('a#submission-button'));
     });
+
+    <% if @running %>
+    countdown(<%= @submission_time_left %>, $('a#submission-button'));
+    <% end %>
   });
 </script>
