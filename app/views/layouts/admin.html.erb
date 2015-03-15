@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>Game of Zones &ndash; Admin Panel</title>
-  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body onload="prettyPrint()">
 
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -18,7 +18,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Game of Zones</a>
+        <a class="navbar-brand" href="<%= admin_path %>">Game of Zones</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,7 +31,7 @@
             <a href="<%= admin_test_cases_path %>">Test Cases</a>
           </li>
           <li<%= raw ' class="active"' if controller_name == "runs" %>>
-            <a href="#">Runs</a>
+            <a href="<%= admin_runs_path %>">Runs</a>
           </li>
           <li<%= raw ' class="active"' if controller_name == "users" %>>
             <a href="<%= admin_users_path %>">Users</a>

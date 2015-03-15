@@ -1,0 +1,86 @@
+<h1>Viewing Run</h1>
+<hr>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Problem:</strong>
+  <%= link_to @run.problem.name, [:admin, @run.problem] %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= link_to @run.user.email, [:admin, @run.user] %>
+</p>
+
+<p>
+  <strong>Tested:</strong>
+  <% if @run.tested %>&check;<% else %>&#10007;<% end %>
+</p>
+
+<p>
+  <strong>Success:</strong>
+  <% if @run.success %>&check;<% else %>&#10007;<% end %>
+</p>
+
+<p>
+  <strong>Start Time:</strong>
+  <%= @run.timestamp.strftime('%b %e, %l:%M:%S %p') %>
+</p>
+
+<p>
+  <strong>System Time (right now):</strong>
+  <%= Time.zone.now.strftime('%b %e, %l:%M:%S %p') %>
+</p>
+
+<hr>
+
+<p>
+  <strong>Statement:</strong>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= raw @run.problem.statement %>
+    </div>
+  </div>
+</p>
+
+<p>
+  <strong>Sample input:</strong>
+  <pre><%= @run.problem.sample_input %></pre>
+</p>
+
+<p>
+  <strong>Sample output:</strong>
+  <pre><%= @run.problem.sample_output %></pre>
+</p>
+
+<hr>
+
+<p>
+  <strong>Input provided:</strong>
+  <pre><%= @run.input %></pre>
+</p>
+
+<p>
+  <strong>Expected output:</strong>
+  <pre><%= @run.expected_output %></pre>
+</p>
+
+<% if @run.tested %>
+
+<p>
+  <strong>Provided output:</strong>
+  <pre><%= @run.output %></pre>
+</p>
+
+<p>
+  <strong>Source code:</strong>
+  <pre class="prettyprint"><%= @run.code %></pre>
+</p>
+
+<% end %>
+
+
+<br>
+
+<%= link_to 'Back to list of Runs', admin_runs_path, class: 'btn btn-default' %>

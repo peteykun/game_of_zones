@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     resources :runs
     resources :users
     resources :test_cases
+    resources :runs
+    
     get  'settings', to: 'settings#index'
     post 'settings', to: 'settings#update'
 
@@ -81,4 +83,5 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  resources :runs
 end

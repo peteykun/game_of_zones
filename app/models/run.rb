@@ -11,26 +11,29 @@ class Run < ActiveRecord::Base
     output_set  = test_set.flat_map { |i| i.output }
 
     self.input           = number_of_test_cases.to_s + "\n" + input_set.join("\n")
-    self.expected_output = number_of_test_cases.to_s + "\n" + output_set.join("\n")
+    self.expected_output = output_set.join("\n")
+  end
+
+  def test
+    return if self.tested
+    self.success = check
+
+    if self.success
+      ## DO STUFF if needed
+    end
+
+    self.tested = true
+    self.save
+    return success
   end
 
 	private
 		def default_values
 			self.success   = false
+      self.tested    = false
       self.timestamp = Time.now
 		end
 
-  def test
-    self.success = check
-
-    if self.success
-      ## DO STUFF
-    end
-
-    return success
-  end
-
-  private
     def check
       run_words = self.output.split
       expected_words = self.expected_output.split

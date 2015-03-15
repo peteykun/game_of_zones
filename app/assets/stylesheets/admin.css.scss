@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "prettify";
 
 body {
   padding-top: 70px;
@@ -11,46 +12,7 @@ body {
   max-width: none !important;
 }
 
-/* Regular Scaffolding CSS */
-
-/*
-body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-a {
-  color: #000;
-  &:visited {
-    color: #666;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
-}
-
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
-*/
+/* Scaffolding CSS */
 
 #notice {
   color: green;
@@ -85,3 +47,10 @@ div {
   }
 }
 
+/* Prevent headbutting anchors */
+
+h4 span { 
+  margin-top: -80px;        /* Size of fixed header */
+  padding-bottom: 80px; 
+  display: block; 
+}
