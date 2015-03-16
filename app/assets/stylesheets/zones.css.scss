@@ -4,16 +4,16 @@
 
 @font-face {
   font-family: 'Power Clear';
-  src: url('/assets/pkmndp.ttf');
-  src: url('/assets/pkmndp.ttf') format('truetype');
+  src: asset-url('pkmndp.ttf');
+  src: asset-url('pkmndp.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Power Clear';
-  src: url('/assets/pkmndpb.ttf');
-  src: url('/assets/pkmndpb.ttf') format('truetype');
+  src: asset-url('pkmndpb.ttf');
+  src: asset-url('pkmndpb.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -137,7 +137,7 @@ div.hover div.problem a {
 }
 
 #map {
-  background-image: url('Map.png');
+  background: url(Map.png);
   width: 960px;
   height: 540px;
   background-color: #0082ca;
