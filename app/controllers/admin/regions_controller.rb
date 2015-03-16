@@ -70,6 +70,6 @@ class Admin::RegionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def region_params
-      params.require(:region).permit(:name, :user_id)
+      params.require(:region).permit(:name, :user_id, :x, :y)
     end
 end

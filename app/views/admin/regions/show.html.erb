@@ -17,6 +17,16 @@
   <% end %>
 </p>
 
+<p>
+  <strong>X-coordinate:</strong>
+  <%= @region.x %>
+</p>
+
+<p>
+  <strong>Y-coordinate:</strong>
+  <%= @region.y %>
+</p>
+
 <br>
 
 <%= link_to 'Edit Region', edit_admin_region_path(@region), class: 'btn btn-default' %>

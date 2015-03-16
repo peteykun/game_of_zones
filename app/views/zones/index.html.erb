@@ -1,6 +1,8 @@
 <h1>World Map</h1>
 <hr>
 
+<% if false %>
+
 <% @fill = true %>
 
 <ol class="zones" data-zone-count="<%= @zones.size %>">
@@ -29,7 +31,68 @@
   -->
 </ol>
 
-<br><br>
+<br>
+<br>
+<br>
+
+<% end %>
 
 <div id="map">
+  <% @zones.each do |zone| %>
+  <div class="marker<%= if zone.active then ' active' else '' end %>  zone<%= zone.id %>" style="top: <%= zone.y %>px; left: <%= zone.x %>px;" data-name="<%= zone.name %>" data-id="<%= zone.id %>"></div>
+  <% end %>
+
+  <!--
+  <div class="marker" style="top: 175px; left: 145px;" data-name="Pewter City"></div>
+  <div class="marker" style="top: 145px; left: 445px;" name="Cerulean City"></div>
+  <div class="marker active" style="top: 325px; left: 445px;" name="Vermillian City"></div>
+  <div class="marker" style="top: 235px; left: 355px;" name="Celadon City"></div>
+  <div class="marker" style="top: 415px; left: 385px;" name="Fuchsia City"></div>
+  <div class="marker" style="top: 235px; left: 445px;" name="Saffron City"></div>
+  <div class="marker" style="top: 475px; left: 145px;" name="Cinnabar Island"></div>
+  <div class="marker" style="top: 295px; left: 145px;" data-name="Viridian City"></div>
+  -->
+
+  <div class="location"><%= @active_zone.name %></div>
+  <div class="info_box zone<%= @active_zone.id %>">
+    <img src="http://sprites.pokecheck.org/t/000.gif" class="avatar">
+
+    <div class="info_area">
+      <b class="header">Trainer Info</b><br>
+      <b>Petey</b>, a <b>Lv. 5</b> Trainer is in control of this zone!<br><br>
+
+      <b class="header">Challenger Info</b><br>
+      Take on the gym! Your <b>Lv. 1</b> Problem is <a href="#">Print Numbers 2</a>.
+    </div>
+  </div>
+
+  <% @zones.each do |zone| %>
+  <% if not zone.active %>
+  <div class="info_box zone<%= zone.id %>" style="display: none;">
+    <img src="http://sprites.pokecheck.org/t/000.gif" class="avatar">
+
+    <div class="info_area">
+      <b class="header">Trainer Info</b><br>
+      <b>Petey</b>, a <b>Lv. 5</b> Trainer is in control of this zone!<br><br>
+
+      <b class="header">Challenger Info</b><br>
+      This gym leader seems to be away right now...
+    </div>
+  </div>
+  <% end %>
+  <% end %>
 </div>
+
+<script>
+  $(function() {
+    $('.marker').on('mouseover', function() {
+      $('.location').html($(this).data('name'));
+
+      $('.info_box').hide();
+      $('.info_box.zone' + $(this).data('id')).show();
+
+      $('.marker.active').removeClass('active');
+      $('.marker.zone' + $(this).data('id')).addClass('active');
+    });
+  });
+</script>

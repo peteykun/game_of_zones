@@ -18,6 +18,7 @@
   font-style: normal;
 }
 
+/*
 ol.zones {
   margin: 0;
   padding: 0;
@@ -100,12 +101,12 @@ ol.zones li.inactive.fill:before {
 }
 
 div.hover {
+  z-index: 3000;
   font-family: 'Power Clear';
   margin-top: 30px;
   border: 5px solid #d04028;
   padding: 8px;
   width: 250px;
-  border-radius: 5px;
   position: absolute;
   text-align: left;
   line-height: 1.7em;
@@ -114,7 +115,7 @@ div.hover {
   margin-left: -60px;
   cursor: pointer;
   background-color: #f8f8f8;
-  box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.85), inset 0 0 7px rgba(0,0,0,0.40);
+  box-shadow: 0 0 3px 0px rgba(0,0,0,0.65), inset 0 0 7px rgba(0,0,0,0.40);
 }
 
 ol.zones li:hover div.hover {
@@ -135,10 +136,142 @@ div.hover div.problem a {
   font-size: 1.5em;
   color: #d04028;
 }
+*/
 
 #map {
   background: asset-url('Map.png');
   width: 960px;
   height: 540px;
   background-color: #0082ca;
+  position: relative;
+  border: 5px solid #d04028;
+}
+
+#map .marker {
+  position: absolute;
+  border: 5px solid #0082ca;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+#map .marker.active {
+  -webkit-animation-name: bordercolorchange;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0s;
+  border-color: #0082ca;
+}
+
+@-webkit-keyframes bordercolorchange {
+  0% {
+    border-color: #0082ca;
+    background-color: transparent;
+  }
+  50% {
+    border-color: #3cb2f2;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+
+#map .marker:hover {
+  border-color: #3cb2f2;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+#map .marker:active {
+  border-color: #176f9e;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#map .location {
+  color: #fff;
+  font-family: 'Power Clear';
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 3em;
+  bottom: 10px;
+  position: absolute;
+  right: 20px;
+}
+
+#map .info_box {
+  background-color: #f8f8f8;
+  box-shadow: 0 0 7px 3px rgba(0,0,0,0.65), inset 0 0 15px rgba(0,0,0,0.40);
+  border: 7px solid #d04028;
+  width: 220px;
+  padding-top: 18px;
+  bottom: 70px;
+  right: 20px;
+  height: 300px;
+  position: absolute;
+  font-family: 'Power Clear';
+}
+
+#map .info_box .avatar {
+  display: block;
+  margin: 15px auto;
+}
+
+#map .info_box .info_area {
+  background-color: rgba(255, 255, 255, 0.65);
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-bottom: 18px;
+  padding-top: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+.info_area b {
+  color: #444;
+}
+
+.info_area a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+#map .info_box .header {
+  text-transform: uppercase;
+  font-size: 1.1em;
+  color: #d04028;
+  background-position: center;
+}
+
+#map .info_box.zone1 {
+  background: asset-url('1.png');
+}
+
+#map .info_box.zone2 {
+  background: asset-url('2.png');
+}
+
+#map .info_box.zone3 {
+  background: asset-url('3.png');
+}
+
+#map .info_box.zone4 {
+  background: asset-url('4.png');
+}
+
+#map .info_box.zone5 {
+  background: asset-url('5.png');
+}
+
+#map .info_box.zone6 {
+  background: asset-url('6.png');
+}
+
+#map .info_box.zone7 {
+  background: asset-url('7.png');
+}
+
+#map .info_box.zone8 {
+  background: asset-url('8.png');
 }
