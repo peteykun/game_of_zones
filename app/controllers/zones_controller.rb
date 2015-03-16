@@ -1,5 +1,5 @@
 class ZonesController < ApplicationController
   def index
-    @zones = Region.all
+    @zones = Region.all.order(:id)
   end
 end
