@@ -24,6 +24,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <li<%= raw ' class="active"' if controller_name == "zones" %>>
+            <a href="<%= zones_path %>">Zones <span class="sr-only">(current)</span></a>
+          </li>
           <li<%= raw ' class="active"' if controller_name == "problems" %>>
             <a href="<%= problems_path %>">Problems <span class="sr-only">(current)</span></a>
           </li>

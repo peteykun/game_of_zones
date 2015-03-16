@@ -1,0 +1,35 @@
+<h1>World Map</h1>
+<hr>
+
+<% @fill = true %>
+
+<ol class="zones" data-zone-count="<%= @zones.size %>">
+  <!--
+  <% @zones.each do |zone| %>
+  --><li class="<%= if zone.active then 'active' else 'inactive' end %><%= if @fill then ' fill' else '' end %>"><%= truncate(zone.name, length: 14) %>
+
+    <div class="hover">
+      <div class="label">Leader:</div> Petey<br>
+      <div class="label">Leader Level:</div> Lv. 5
+
+      <% if zone.active %>
+        <br><br>
+
+        <div class="problem">
+          <div class="label">Next Problem: (Lv. 2)</div><br>
+          <a href="#">Print Numbers 2</a>
+        </div>
+
+      <% @fill = false %>
+    </div>
+    <% end %>
+
+  </li><!--
+  <% end %>
+  -->
+</ol>
+
+<br><br>
+
+<div id="map">
+</div>

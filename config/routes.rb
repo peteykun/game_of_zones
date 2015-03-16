@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  root 'problems#index'
+  root 'zones#index'
   get '/admin', to: redirect('/admin/problems')
 
   namespace :admin do
@@ -84,4 +84,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :runs
+  resources :zones
 end
