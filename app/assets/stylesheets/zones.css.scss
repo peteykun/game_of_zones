@@ -18,126 +18,6 @@
   font-style: normal;
 }
 
-/*
-ol.zones {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-ol.zones li {
-  display: inline-block;
-  position: relative;
-  text-align: center;
-  line-height: 3em;
-}
-
-ol.zones[data-zone-count="1"] li { width: 100%; }
-ol.zones[data-zone-count="2"] li { width: 49%; }
-ol.zones[data-zone-count="3"] li { width: 33%; }
-ol.zones[data-zone-count="4"] li { width: 24%; }
-ol.zones[data-zone-count="5"] li { width: 19%; }
-ol.zones[data-zone-count="6"] li { width: 16%; }
-ol.zones[data-zone-count="7"] li { width: 14%; }
-ol.zones[data-zone-count="8"] li { width: 12.5%; }
-ol.zones[data-zone-count="9"] li { width: 11%; }
-ol.zones[data-zone-count="10"] li { width: 9%; }
-
-ol.zones li {
-  color: #0082ca;
-  border-bottom: 4px solid #0082ca;
-  cursor: pointer;
-}
-
-ol.zones li.fill {
-  color: yellowgreen;
-}
-
-ol.zones li.inactive:before:hover {
-  background-color: black;
-}
-
-ol.zones li.active {
-  color: yellowgreen;
-}
-
-ol.zones li:after {
-  content: "\00a0\00a0";
-}
-
-ol.zones li:before {
-  position: relative;
-  bottom: -2.5em;
-  float: left;
-  left: 50%;
-  line-height: 1em;
-}
-
-ol.zones li.active:before {
-  content: "\2713";
-  color: white;
-  background-color: yellowgreen;
-  height: 1.2em;
-  width: 1.2em;
-  line-height: 1.2em;
-  border: none;
-  border-radius: 1.2em;
-}
-
-ol.zones li.inactive:before {
-  content: "\039F";
-  color: #0082ca;
-  background-color: white;
-  font-size: 1.5em;
-  bottom: -1.6em;
-}
-
-ol.zones li.fill {
-  border-bottom: 4px solid yellowgreen;
-}
-
-ol.zones li.inactive.fill:before {
-  color: yellowgreen;
-}
-
-div.hover {
-  z-index: 3000;
-  font-family: 'Power Clear';
-  margin-top: 30px;
-  border: 5px solid #d04028;
-  padding: 8px;
-  width: 250px;
-  position: absolute;
-  text-align: left;
-  line-height: 1.7em;
-  color: black;
-  display: none;
-  margin-left: -60px;
-  cursor: pointer;
-  background-color: #f8f8f8;
-  box-shadow: 0 0 3px 0px rgba(0,0,0,0.65), inset 0 0 7px rgba(0,0,0,0.40);
-}
-
-ol.zones li:hover div.hover {
-  display: block;
-}
-
-div.hover:hover {
-  display: block;
-}
-
-div.hover div.label {
-  color: black;
-  padding: 5px 0;
-  font-size: 1.1em;
-}
-
-div.hover div.problem a {
-  font-size: 1.5em;
-  color: #d04028;
-}
-*/
-
 #map {
   background: asset-url('Map.png');
   width: 960px;
@@ -217,7 +97,6 @@ div.hover div.problem a {
   display: block;
   margin: 15px auto;
 }
-
 #map .info_box .info_area {
   background-color: rgba(255, 255, 255, 0.65);
   padding-left: 18px;
@@ -236,7 +115,22 @@ div.hover div.problem a {
   text-decoration: none;
   color: black;
   font-weight: bold;
+  -webkit-animation-name: linkcolorchange;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0s;
 }
+
+@-webkit-keyframes linkcolorchange {
+  0%, 100% {
+    color: black;
+  }
+  50% {
+    color: #d04028;
+  }
+}
+
 
 #map .info_box .header {
   text-transform: uppercase;

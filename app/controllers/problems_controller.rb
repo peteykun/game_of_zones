@@ -1,5 +1,6 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :request_input, :submit_output]
+  before_action :check_if_allowed, only: [:show, :request_input, :submit_output]
   before_action :set_cache_buster
 
   def set_cache_buster
@@ -10,7 +11,9 @@ class ProblemsController < ApplicationController
 
   # GET /problems
   def index
-    @problems = Problem.all
+    @problems = Problem.where(region: current_zone).order('difficulty ASC')
+    @current_zone = current_zone
+    @allowed_level = Manifest.where(user: current_user, region: current_zone)[0].level + 1
   end
 
   # GET /problems/1
@@ -85,5 +88,17 @@ class ProblemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_problem
       @problem = ::Problem.find(params[:id])
+    end
+
+    def check_if_allowed
+      if @problem.region != current_zone
+        redirect_to action: 'index', notice: 'This region is closed right now.'
+        return
+      end
+
+      if @problem.difficulty > current_user.level(current_zone) + 1
+        redirect_to action: 'index', notice: 'This problem is locked right now.'
+        return
+      end
     end
 end

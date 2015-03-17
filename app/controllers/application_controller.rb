@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
     #return unless session[:user_id]
     #@current_user ||= User.find(session[:user_id])
   end
+
+  def current_zone
+    return Region.find_by_active(true)
+  end
 end

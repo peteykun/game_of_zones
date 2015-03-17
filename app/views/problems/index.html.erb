@@ -1,10 +1,14 @@
-  <h1>List of Problems</h1>
+<h1>List of Problems (<%= @current_zone.name %>)</h1>
 <hr>
+
+<% if params[:notice] != nil %>
+<div class="alert alert-danger" role="alert">Oak's words echoed... <b><%= params[:notice] %></b><br>There's a time and place for everything, but not now!</div>
+<% end %>
 
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th width="5%">#</th>
+      <th width="5%">Lv.</th>
       <th width="70%">Problem Name</th>
       <th>Controls</th>
     </tr>
@@ -13,11 +17,17 @@
   <tbody>
     <% @problems.each do |problem| %>
       <tr>
-        <td><%= problem.id %></td>
+        <td><%= problem.difficulty %></td>
         <td><%= problem.name %></td>
         <td>
+          <% if problem.difficulty <= @allowed_level %>
           <%= link_to problem do %>
           <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Read Statement
+          <% end %>
+          <% else %>
+          <%= link_to problem do %>
+          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Problem Locked
+          <% end %>
           <% end %>
         </td>
       </tr>

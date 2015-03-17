@@ -19,7 +19,19 @@ class Run < ActiveRecord::Base
     self.success = check
 
     if self.success
-      ## DO STUFF if needed
+      m = Manifest.where(user: self.user, region: self.problem.region)[0]
+
+      if self.problem.difficulty > m.level
+        m.level = self.problem.difficulty
+        m.save
+      end
+
+      r = self.problem.region
+
+      if r.user == nil or m.level > r.level(r.user)
+        r.user = self.user
+        r.save
+      end
     end
 
     self.tested = true
