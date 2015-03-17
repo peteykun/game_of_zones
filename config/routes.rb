@@ -88,4 +88,6 @@ Rails.application.routes.draw do
   resources :runs
   resources :zones
   get 'welcome', to: 'users#welcome'
+  post 'login', to: 'users#login'
+  get 'register', to: 'users#register'
 end

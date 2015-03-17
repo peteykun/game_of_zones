@@ -1,3 +1,31 @@
+<br><br>
+
+<div class="panel panel-default" style="padding: 20px 40px 50px 40px;">
+  <h1>Login</h2>
+  <hr>
+
+  <%= form_tag login_path do %>
+    <b>Username:</b>
+    <%= text_field_tag 'username', nil, class: 'form-control' %>
+    <br>
+
+    <b>Password:</b>
+    <%= password_field_tag 'password', nil, class: 'form-control' %>
+    <br>
+
+    <input type="checkbox" name="remember_me"> Remember Me<br><br>
+    
+    <input type="submit" value="Log me in" class="btn btn-success">
+  <% end %>
+</div>
+
+<div id="register-block">
+  <i>Not registered yet?</i><br>
+  Click the button below to register.<br><br>
+  <button id="register-button" class="btn btn-primary btn-lg">Register Now</button>
+</div>
+
+
 <div class="overlay" style="display: none;"></div>
 
 <div id="welcome_box" style="display: none;">
@@ -57,7 +85,7 @@
       working = true;
       $('#panel').html('');
       $('#advance').hide();
-      showText('#panel', line, -1, 70);
+      showText('#panel', line, -1, 30);
     }
   }
 
@@ -75,7 +103,7 @@
       working = true;
       $('#panel').html('');
       $('#advance').hide();
-      showText('#panel', line + "\n?> ", -1, 70, false);
+      showText('#panel', line + "\n?> ", -1, 30, false);
       current_name = name;
     }
   }
@@ -154,7 +182,7 @@
     i++;
   }
 
-  $(function() {
+  $('#register-button').on('click', function() {
     $('.overlay').fadeIn(1100)
     $('#welcome_box').fadeIn(1100, function() {
       $('#professor_oak').fadeIn(4000, function() {
@@ -179,7 +207,7 @@
 
             {
               type: 'line',
-              content: '...is inhabited far and wide by creatures \ncalled Pokémon!'
+              content: '... is inhabited far and wide by creatures \ncalled Pokémon!'
             },
 
             {
@@ -190,6 +218,17 @@
             {
               type: 'line',
               content: 'Myself...\nI study Pokémon as a profession.'
+            },
+
+            {
+              type: 'line',
+              content: 'But first, tell me a little about yourself. \nNow tell me. Are you a boy? Or are you a girl?'
+            },
+
+            {
+              type: 'boygirl',
+              content: '',
+              var_name: 'gender'
             },
 
             {
