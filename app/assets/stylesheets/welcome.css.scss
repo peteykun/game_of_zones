@@ -1,0 +1,99 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.8;
+  z-index: 1101;
+}
+
+#welcome_box {
+  background: asset-url('intro_bg.png');
+  width: 960px;
+  height: 640px;
+  border: 5px solid #fff;
+  position:fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -480px;
+  margin-top: -320px;
+  opacity: 1;
+  z-index:1102;
+}
+
+#professor_oak {
+  width: 232px;
+  height: 352px;
+  background: asset-url('intro_oak.png');
+  position: absolute;
+  top: 90px;
+  left: 340px;
+}
+
+#welcome_box #ext_image {
+  width: 950px;
+  height: 630px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#welcome_box #panel {
+  width: 916px;
+  height: 152px;
+  background: asset-url('intro_panel.png');
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 20px 33px;
+  font-family: 'Power Clear';
+  font-size: 2.6em;
+  z-index: 2500;
+}
+
+#welcome_box #advance {
+  background: asset-url('intro_advance.png');
+  width: 40px;
+  height: 24px;
+  position: absolute;
+  bottom: 45px;
+  right: 50px;
+  -webkit-animation-name: bob;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0s;
+  cursor: pointer;
+  z-index: 2501;
+}
+
+@-webkit-keyframes bob {
+  0%, 100% {
+    bottom: 45px;
+  }
+  50% {
+    bottom: 55px;
+  }
+}
+
+#prompt {
+  z-index: 2502;
+}
+
+#prompt input {
+  position: absolute;
+  bottom: 45px;
+  left: 95px;
+  padding: 0;
+  font-family: 'Power Clear';
+  font-size: 2.6em;
+  border: none;
+  background-color: #F8F8F8;
+  z-index: 2502;
+}
+
+#prompt input:focus {
+  outline: 0;
+}

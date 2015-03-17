@@ -1,0 +1,277 @@
+<div class="overlay" style="display: none;"></div>
+
+<div id="welcome_box" style="display: none;">
+  <div id="professor_oak" style="display: none;"></div>
+  <div id="panel" style="display: none;"></div>
+  <div id="ext_image" style="display: none;"></div>
+
+  <div id="prompt" style="display: none;"><input type="text" value=""></div>
+
+  <div id="advance" style="display: none;"></div>
+</div>
+
+<audio loop>
+  <source src="<%= asset_url('welcome.mp3') %>" type="audio/mpeg">
+</audio>
+
+<script>
+  var current_name;
+  var i = 0;
+  var vars = {};
+  var working;
+
+  var showText = function (target, message, index, interval, advance_or_prompt) {   
+    advance_or_prompt = typeof advance_or_prompt !== 'undefined' ? advance_or_prompt : true; // defaults to true = advance
+
+    if (index < message.length) {
+      if(message[index++] == '\n')
+        $(target).append('<br>');
+      
+      $(target).append(message[index]);
+      setTimeout(function () { showText(target, message, index, interval, advance_or_prompt); }, interval);
+    }
+    else {
+      if(advance_or_prompt === true) {
+        $('#advance').show();
+      } else if(advance_or_prompt == false) {
+        $('#prompt').show();
+        $('#prompt input').focus();
+      }
+
+      working = false;
+    }
+  }
+
+  var showLine = function(line) {
+    if(working == true)
+      return;
+
+    if($('#panel').is(":visible") === false) {
+      $('#panel').html('');
+      $('#panel').fadeIn(2000, function() {
+        showLine(line);
+      });
+      return;
+    }
+    else {
+      working = true;
+      $('#panel').html('');
+      $('#advance').hide();
+      showText('#panel', line, -1, 70);
+    }
+  }
+
+  var promptInput = function(line, name) {
+    if(working == true)
+      return;
+
+    if($('#panel').is(":visible") === false) {
+      $('#panel').html('');
+      $('#panel').fadeIn(2000, function() {
+        promptInput(line, name);
+      });
+    }
+    else {
+      working = true;
+      $('#panel').html('');
+      $('#advance').hide();
+      showText('#panel', line + "\n?> ", -1, 70, false);
+      current_name = name;
+    }
+  }
+
+  function beginScript(lines) {
+    switch(lines[0]['type']) {
+      case 'line':
+        showLine(lines[0]['content']);
+        break;
+
+      case 'prompt':
+        promptInput(lines[i]['content'], lines[i]['var_name']);
+        break;
+    }
+
+    i++;
+
+    $('#advance').on('click', function() { advanceScript(lines); });
+    $('#prompt input').on('keypress', function(event) {
+      if(event.keyCode !== 13)
+        return;
+
+      vars[current_name] = $('#prompt input').val();
+      advanceScript(lines);
+      $('#prompt input').val('');
+      $('#prompt').hide();
+    });
+  }
+
+  function advanceScript(lines) {
+    if(i == lines.size)
+      return;
+
+    var j = 0;
+
+    while((dollarpos = lines[i]['content'].indexOf('$')) !== -1) {
+      lines[i]['content'] = lines[i]['content'].substring(0, dollarpos) + vars[lines[i]['subs'][j++]] + lines[i]['content'].substring(dollarpos+1, lines[i]['content'].length)
+    }
+
+    switch(lines[i]['type']) {
+      case 'line':
+        showLine(lines[i]['content']);
+        break;
+
+      case 'prompt':
+        promptInput(lines[i]['content'], lines[i]['var_name']);
+        break;
+
+      case 'load_image':
+        $('#advance').hide();
+        $('#professor_oak').fadeOut(2000);
+        $('#panel').fadeOut(2000, function() {
+          $('#panel').val('');
+          $('#ext_image').css('background-image', 'url(' + lines[i-1]['content'] + ')');
+          $('#ext_image').fadeIn(2000, function() {
+            advanceScript(lines);
+          });
+        });
+        break;
+
+      case 'load_oak':
+        $('#advance').hide();
+        $('#panel').fadeOut(2000);
+        $('#ext_image').fadeOut(2000, function() {
+          $('#professor_oak').fadeIn(2000, function() {
+            advanceScript(lines);
+          });
+        });
+        break;
+
+      case 'redirect':
+        window.location = lines[i]['content'] + '?name=' + vars['name']
+        break;
+    }
+
+    i++;
+  }
+
+  $(function() {
+    $('.overlay').fadeIn(1100)
+    $('#welcome_box').fadeIn(1100, function() {
+      $('#professor_oak').fadeIn(4000, function() {
+        $('#panel').fadeIn(1000, function() {
+          
+          var lines = [
+
+            {
+              type: 'line',
+              content: "Hello there! Glad to meet you!\nWelcome to the world of Pokémon!"
+            },
+
+            {
+              type: 'line',
+              content: 'My name is Oak! People affectionately refer to me \nas the Pokémon Professor!'
+            },
+
+            {
+              type: 'line',
+              content: 'This world...'
+            },
+
+            {
+              type: 'line',
+              content: '...is inhabited far and wide by creatures \ncalled Pokémon!'
+            },
+
+            {
+              type: 'line',
+              content: 'For some people, Pokémon are pets.\nOther use them for battling.'
+            },
+
+            {
+              type: 'line',
+              content: 'Myself...\nI study Pokémon as a profession.'
+            },
+
+            {
+              type: 'prompt',
+              content: "Let's begin with your name. What is it?",
+              var_name: 'name'
+            },
+
+            {
+              type: 'line',
+              content: 'Right... So your name is $.',
+              subs: ['name']
+            },
+
+            {
+              type: 'line',
+              content: "So, $...\nYou say you're not a Pokémon Trainer?",
+              subs: ['name']
+            },
+
+            {
+              type: 'line',
+              content: "A Pokémon Programmer...? \nSo you're one of those people that use..."
+            },
+
+            {
+              type: 'line',
+              content: "... the power of your Pokémon to solve problems! \nMm-hm, the power of science is staggering!"
+            },
+
+            {
+              type: 'line',
+              content: "So, are you out to challenge the Pokémon \nProgrammers' League?"
+            },
+
+            {
+              type: 'load_image',
+              content: '<%= asset_url('gym_leaders.jpg') %>'
+            },
+
+            {
+              type: 'line',
+              content: "In the Pokémon Programmers' League, you must \nfight 8 formidable opponents..."
+            },
+
+            {
+              type: 'line',
+              content: "... the so-called Gym Leaders. \nBut you won't be the only one fighting for supremacy!"
+            },
+
+            {
+              type: 'line',
+              content: "The longer you retain control of each gym, \nthe better your odds of winning the league."
+            },
+
+            {
+              type: 'load_oak',
+              content: ''
+            },
+
+            {
+              type: 'line',
+              content: 'Your very own Pokémon legend is about to unfold!'
+            },
+
+            {
+              type: 'line',
+              content: 'A world of dreams and adventures with Pokémon awaits! \nLet\'s go!'
+            },
+
+            {
+              type: 'redirect',
+              content: '/register'
+            }
+
+          ];
+
+          beginScript(lines);
+
+        });
+      });
+      $('audio')[0].play()
+    });
+  });
+</script>

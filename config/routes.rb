@@ -87,4 +87,5 @@ Rails.application.routes.draw do
   resources :users
   resources :runs
   resources :zones
+  get 'welcome', to: 'users#welcome'
 end
