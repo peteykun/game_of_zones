@@ -1,0 +1,61 @@
+<h1>Game Manager</h1>
+<hr>
+
+<br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Start Game</b>
+    <p>This will perform the following tasks:
+
+      <ul>
+        <li>Freeze the number of regions or zones.</li>
+        <li>Enable the zone scheduler.</li>
+        <li>Enable the scoring scheduler.</li>
+      </ul>
+
+      In case you have not perfomed the assignment of problems to regions, they will be automatically assigned during this step. Make sure you have as many regions as you need before this.
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <br>
+    <%= link_to 'Start Game', '#', class: 'btn btn-success', style: 'width: 100%' %>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Manually change active zone</b>
+    <p>In case the zone scheduler is not enabled or buggy, you can manually change the active zone.</p>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <%= link_to 'Change Active Zone', '#', class: 'btn btn-primary', style: 'width: 100%' %>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Disable zone scheduler</b>
+    <p>Turn off the active zone scheduler.</p>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <%= link_to 'Disable zone scheduler', '#', class: 'btn btn-danger', style: 'width: 100%' %>
+  </div>
+</div>
+
+<br><br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Disable scoring scheduler</b>
+    <p>Turn off the scoring scheduler.</p>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <%= link_to 'Disable scoring scheduler', '#', class: 'btn btn-danger', style: 'width: 100%' %>
+  </div>
+</div>
+
+<br><br>

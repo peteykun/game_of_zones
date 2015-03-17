@@ -11,27 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316150535) do
-
-  create_table "admin_problems", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "admin_regions", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "admin_runs", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "admin_users", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20150317070408) do
 
   create_table "config_tables", force: true do |t|
     t.string   "key"
@@ -67,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150316150535) do
     t.boolean  "active"
     t.integer  "x"
     t.integer  "y"
+    t.integer  "rounds"
   end
 
   create_table "runs", force: true do |t|
