@@ -127,7 +127,7 @@
 }
 
 #choice div {
-  background: url(/assets/intro_choice_arrow.png);
+  background: asset-url('intro_choice_arrow.png');
   background-position: left center;
   background-repeat: no-repeat;
   padding-left: 32px;
@@ -136,7 +136,7 @@
 
 #choice div:hover {
   color: #E00808;
-  background: url(intro_choice_arrow_red.png);
+  background: asset-url('intro_choice_arrow_red.png');
   background-position: left center;
   background-repeat: no-repeat;
 }
