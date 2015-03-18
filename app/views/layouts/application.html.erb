@@ -42,9 +42,6 @@
             <a href="<%= admin_path %>" target="_blank">Admin Panel</a>
           </li>
           <% end %>
-          <li>
-            <a href="<%= logout_path %>">Logout</a>
-          </li>
           <% else %>
           <li<%= raw ' class="active"' if controller_name == "sessions" %>>
             <a href="<%= login_path %>">Login</a>
@@ -53,9 +50,13 @@
           <li<%= raw ' class="active"' if controller_name == "users" %>>
             <a href="<%= login_path %>?register=true">Register</a>
           </li>
-
+          <%end %>
           <li>
-            <a href="#">Event Rules</a>
+            <a href="http://edg.co.in/content/pdfs/42.pdf" target="_blank">Event Rules</a>
+          </li>
+          <% if current_user != nil %>
+          <li>
+            <a href="<%= logout_path %>">Logout</a>
           </li>
           <% end %>
         </ul>
