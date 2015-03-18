@@ -85,13 +85,15 @@
 #prompt input {
   position: absolute;
   bottom: 45px;
-  left: 95px;
-  padding: 0;
+  left: 90px;
+  padding: 0 5px;
   font-family: 'Power Clear';
   font-size: 2.6em;
   border: none;
   background-color: #F8F8F8;
   z-index: 2502;
+  width: 300px;
+  border-bottom: 2px solid #333;
 }
 
 #prompt input:focus {
@@ -110,4 +112,31 @@
 .preload-font {
   font-family: 'Power Clear';
   color: #fff;
+}
+
+#choice {
+  background: asset-url('intro_choice.png');
+  width: 248px;
+  height: 155px;
+  bottom: 180px;
+  right: 20px;
+  position: absolute;
+  font-family: 'Power Clear';
+  font-size: 2.6em;
+  padding: 20px 33px;
+}
+
+#choice div {
+  background: url(/assets/intro_choice_arrow.png);
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-left: 32px;
+  cursor: pointer;
+}
+
+#choice div:hover {
+  color: #E00808;
+  background: url(intro_choice_arrow_red.png);
+  background-position: left center;
+  background-repeat: no-repeat;
 }

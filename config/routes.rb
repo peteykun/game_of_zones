@@ -87,7 +87,9 @@ Rails.application.routes.draw do
   resources :users
   resources :runs
   resources :zones
-  get 'welcome', to: 'users#welcome'
-  post 'login', to: 'users#login'
-  get 'register', to: 'users#register'
+  resources :sessions
+  
+  get 'login',    to: 'sessions#new'
+  get 'register', to: 'users#new'
+  get 'logout',   to: 'sessions#destroy'
 end

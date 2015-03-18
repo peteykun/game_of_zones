@@ -5,12 +5,23 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    return User.find(1)
-    #return unless session[:user_id]
-    #@current_user ||= User.find(session[:user_id])
+    return unless session[:user_id]
+    @current_user ||= User.find(session[:user_id])
   end
 
   def current_zone
     return Region.find_by_active(true)
+  end
+
+  def check_if_logged_in
+    if current_user == nil
+      redirect_to login_path
+    end
+  end
+
+  def check_if_logged_out
+    if current_user != nil
+      redirect_to root_path
+    end
   end
 end

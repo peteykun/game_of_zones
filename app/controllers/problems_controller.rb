@@ -2,6 +2,7 @@ class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :request_input, :submit_output]
   before_action :check_if_allowed, only: [:show, :request_input, :submit_output]
   before_action :set_cache_buster
+  before_action :check_if_logged_in
 
   def set_cache_buster
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
@@ -21,7 +22,7 @@ class ProblemsController < ApplicationController
     @submission_time_limit = AdminConfig[:submission_time_limit].to_i
     @runs = Run.where(user: current_user, problem: @problem).order('id DESC')
 
-    current_runs = @problem.runs.where(user: User.first).where("timestamp > ?", DateTime.strptime((Time.now.to_i - 120).to_s, "%s"))
+    current_runs = @problem.runs.where(user: current_user).where("timestamp > ?", DateTime.strptime((Time.now.to_i - 120).to_s, "%s"))
     @submission_time_limit = AdminConfig[:submission_time_limit].to_i
 
     if current_runs.size > 0 and current_runs.last.tested == false
@@ -43,7 +44,7 @@ class ProblemsController < ApplicationController
   # GET /problems/1/request_input
   def request_input
     @test_case_limit = AdminConfig[:test_case_limit].to_i
-    current_runs = @problem.runs.where(user: User.first, tested: false).where("timestamp > ?", DateTime.strptime((Time.now.to_i - 120).to_s, "%s"))
+    current_runs = @problem.runs.where(user: current_user, tested: false).where("timestamp > ?", DateTime.strptime((Time.now.to_i - 120).to_s, "%s"))
 
     if current_runs.size > 0
       run = current_runs.last
@@ -57,7 +58,7 @@ class ProblemsController < ApplicationController
 
   # GET /problems/1/submit_output
   def submit_output
-    current_runs = @problem.runs.where(user: User.first, tested: false).where("timestamp > ?", DateTime.strptime((Time.now.to_i - 120).to_s, "%s"))
+    current_runs = @problem.runs.where(user: current_user, tested: false).where("timestamp > ?", DateTime.strptime((Time.now.to_i - 120).to_s, "%s"))
 
     if current_runs.size > 0
       run = current_runs.last

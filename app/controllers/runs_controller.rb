@@ -1,5 +1,6 @@
 class RunsController < ApplicationController
   before_action :set_run, only: [:show]
+  before_action :check_if_logged_in
 
   # GET /runs
   # GET /runs.json

@@ -17,7 +17,7 @@ Region.create(name: 'Cinnabar Island',  x: 145, y: 475, active: false)
 Region.create(name: 'Viridian City',    x: 145, y: 295, active: false)
 
 # Add a user
-u = User.create(email: 'pt@live.in', password: 'mudkip', password_confirmation: 'mudkip', is_admin: true)
+u = User.create(username: 'petey', email: 'pt@live.in', password: 'mudkip', password_confirmation: 'mudkip', is_admin: true, college: 'Techno India', name: 'Soham Pal')
 
 Region.all.each do |r|
   Manifest.create(user: u, region: r, level: 0)

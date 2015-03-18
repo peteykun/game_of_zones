@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317070408) do
+ActiveRecord::Schema.define(version: 20150318053930) do
 
   create_table "config_tables", force: true do |t|
     t.string   "key"
@@ -78,6 +78,10 @@ ActiveRecord::Schema.define(version: 20150317070408) do
     t.boolean  "is_admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
+    t.string   "gender"
+    t.string   "name"
+    t.string   "college"
   end
 
 end

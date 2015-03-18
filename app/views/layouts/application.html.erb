@@ -24,6 +24,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <% if current_user != nil %>
           <li<%= raw ' class="active"' if controller_name == "zones" %>>
             <a href="<%= zones_path %>">World Map <span class="sr-only">(current)</span></a>
           </li>
@@ -36,6 +37,22 @@
           <li<%= raw ' class="active"' if controller_name == "users" %>>
             <a href="<%= users_path %>">Leaderboard</a>
           </li>
+          <li>
+            <a href="<%= logout_path %>">Logout</a>
+          </li>
+          <% else %>
+          <li<%= raw ' class="active"' if controller_name == "sessions" %>>
+            <a href="<%= login_path %>">Login</a>
+          </li>
+
+          <li<%= raw ' class="active"' if controller_name == "users" %>>
+            <a href="<%= login_path %>">Register</a>
+          </li>
+
+          <li>
+            <a href="#">Event Rules</a>
+          </li>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
