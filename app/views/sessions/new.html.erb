@@ -284,6 +284,9 @@
       if(event.keyCode !== 13)
         return;
 
+      if($('#prompt input').val().trim() === "")
+        return;
+
       vars[current_name] = $('#prompt input').val();
       advanceScript(lines);
       $('#prompt input').val('');
