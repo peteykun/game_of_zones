@@ -6,7 +6,7 @@ class Admin::RegionsController < ApplicationController
   # GET /regions
   # GET /regions.json
   def index
-    @regions = ::Region.all
+    @regions = ::Region.all.order(:id)
   end
 
   # GET /regions/1
