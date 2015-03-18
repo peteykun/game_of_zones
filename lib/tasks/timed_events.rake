@@ -5,7 +5,7 @@ namespace :timed_events do
     zone_scheduler_enabled    = ConfigTable.lookup('zone_scheduler_enabled')
 
     if zone_scheduler_enabled == true
-      regions = Region.all
+      regions = Region.all.order(:id)
       active_region = Region.find_by_active(true)
 
       i = regions.index(active_region)

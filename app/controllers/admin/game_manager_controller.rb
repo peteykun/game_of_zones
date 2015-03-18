@@ -31,7 +31,7 @@ class Admin::GameManagerController < ApplicationController
   end
 
   def change_active_zone
-    regions = Region.all
+    regions = Region.all.order(:id)
     active_region = Region.find_by_active(true)
 
     i = regions.index(active_region)
