@@ -8,7 +8,11 @@
 
   <div class="location"><%= @active_zone.name %></div>
   <div class="info_box zone<%= @active_zone.id %>">
-    <img src="http://sprites.pokecheck.org/t/000.gif" class="avatar">
+    <% if current_user.gender == 'male' %>
+    <%= image_tag 'boy_sprite.gif', class: 'avatar' %>
+    <% else %>
+    <%= image_tag 'girl_sprite.gif', class: 'avatar' %>
+    <% end %>
 
     <div class="info_area">
       <b class="header">Trainer Info</b><br>
