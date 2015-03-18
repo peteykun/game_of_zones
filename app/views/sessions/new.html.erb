@@ -9,11 +9,12 @@
   <% elsif @error != nil %>
     <div class="alert alert-danger" role="alert"><b>Uhh...</b> <%= @error %></div>
   <% end %>
+  <br>
 
   <%= form_tag sessions_path do %>
     <b>Username:</b>
     <%= text_field_tag 'username', nil, class: 'form-control' %>
-    <br>
+    <br><br>
 
     <b>Password:</b>
     <%= password_field_tag 'password', nil, class: 'form-control' %>
@@ -23,11 +24,13 @@
   <% end %>
 </div>
 
+<!--
 <div id="register-block">
   <i>Not registered yet?</i><br>
   Click the button below to register.<br><br>
   <button id="register-button" class="btn btn-primary btn-lg">Register Now</button>
 </div>
+-->
 
 <div class="preload-font">.</div>
 
@@ -352,6 +355,7 @@
     i++;
   }
 
+  /*
   $('#register-button').on('click', function() {
     $('.overlay').fadeIn(1100)
     $('#welcome_box').fadeIn(1100, function() {
@@ -365,4 +369,21 @@
       $('audio')[0].play()
     });
   });
+  */
+
+  <% if params[:register] == 'true' %>
+  $(function() {
+    $('.overlay').fadeIn(1100)
+    $('#welcome_box').fadeIn(1100, function() {
+      $('#professor_oak').fadeIn(4000, function() {
+        $('#panel').fadeIn(1000, function() {
+          
+          beginScript(lines);
+
+        });
+      });
+      $('audio')[0].play()
+    });
+  });
+  <% end %>
 </script>

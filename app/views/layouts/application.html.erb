@@ -37,6 +37,11 @@
           <li<%= raw ' class="active"' if controller_name == "users" %>>
             <a href="<%= users_path %>">Leaderboard</a>
           </li>
+          <% if current_user.is_admin %>
+          <li>
+            <a href="<%= admin_path %>" target="_blank">Admin Panel</a>
+          </li>
+          <% end %>
           <li>
             <a href="<%= logout_path %>">Logout</a>
           </li>
@@ -46,7 +51,7 @@
           </li>
 
           <li<%= raw ' class="active"' if controller_name == "users" %>>
-            <a href="<%= login_path %>">Register</a>
+            <a href="<%= login_path %>?register=true">Register</a>
           </li>
 
           <li>

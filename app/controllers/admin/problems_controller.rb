@@ -1,11 +1,12 @@
 class Admin::ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin
   layout 'admin'
 
   # GET /problems
   # GET /problems.json
   def index
-    @problems = ::Problem.all
+    @problems = ::Problem.all.order(:id)
   end
 
   # GET /problems/1

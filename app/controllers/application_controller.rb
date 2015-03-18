@@ -24,4 +24,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def check_if_admin
+    if current_user == nil or current_user.is_admin == false
+      redirect_to root_path
+    end
+  end
 end

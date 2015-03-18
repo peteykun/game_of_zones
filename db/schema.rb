@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318053930) do
+ActiveRecord::Schema.define(version: 20150318101011) do
 
   create_table "config_tables", force: true do |t|
     t.string   "key"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20150318053930) do
     t.string   "gender"
     t.string   "name"
     t.string   "college"
+    t.integer  "score"
   end
 
 end

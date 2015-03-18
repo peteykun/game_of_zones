@@ -1,5 +1,6 @@
 class Admin::RunsController < ApplicationController
   before_action :set_run, only: [:show]
+  before_action :check_if_admin
   layout 'admin'
 
   # GET /runs

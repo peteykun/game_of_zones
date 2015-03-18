@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
-  before_action :check_if_logged_out
+  before_action :check_if_logged_out, only: [:new, :create]
+  before_action :check_if_logged_in, only: [:index]
+
+  def index
+    @users = User.all.order('score DESC')
+  end
 
   # GET /users/new
   # GET /register
   def new
     @user = User.new
     @user.is_admin = false
+    @user.score = 0
 
     if params[:name] != nil
       @user.username = params[:name]
@@ -20,7 +26,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.is_admin = false
+    @user.score = 0
     @user.username.downcase!
+    @user.email.downcase!
 
     if @user.save
       Region.all.each do |r|
@@ -36,6 +44,6 @@ class UsersController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :is_admin, :username, :name, :gender, :college)
+      params.require(:user).permit(:email, :password, :password_confirmation, :username, :name, :gender, :college)
     end
 end

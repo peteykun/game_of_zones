@@ -1,12 +1,13 @@
 class Admin::TestCasesController < ApplicationController
   before_action :set_problem, only: [:problem, :new]
   before_action :set_test_case, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin
   layout 'admin'
 
   # GET /test_cases
   # GET /test_cases.json
   def index
-    @problems = ::Problem.all
+    @problems = ::Problem.all.order(:id)
   end
 
   # GET /problems/new

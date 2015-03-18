@@ -1,11 +1,12 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin
   layout 'admin'
 
   # GET /users
   # GET /users.json
   def index
-    @users = ::User.all
+    @users = ::User.all.order(:id)
   end
 
   # GET /users/1
@@ -26,6 +27,8 @@ class Admin::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = ::User.new(user_params)
+    @user.email.downcase!
+    @user.username.downcase!
 
     respond_to do |format|
       if @user.save
@@ -41,6 +44,9 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    user_params[:email].downcase!
+    user_params[:username].downcase!
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to [:admin, @user], notice: 'User was successfully updated.' }
@@ -70,6 +76,6 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :is_admin)
+      params.require(:user).permit(:email, :password, :password_confirmation, :is_admin, :username, :name, :college)
     end
 end

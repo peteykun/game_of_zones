@@ -1,5 +1,6 @@
 class Admin::RegionsController < ApplicationController
   before_action :set_region, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin
   layout 'admin'
 
   # GET /regions

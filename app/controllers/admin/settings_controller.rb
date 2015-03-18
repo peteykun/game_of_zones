@@ -1,4 +1,5 @@
 class Admin::SettingsController < ApplicationController
+  before_action :check_if_admin
   layout 'admin'
 
   def index

@@ -4,13 +4,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Username:</strong>
+  <%= @user.username.titleize %>
+</p>
+
+<p>
   <strong>Email:</strong>
   <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
 </p>
 
 <p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>College:</strong>
+  <%= @user.college %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= if @user.is_admin then "Yes" else "No" end %>
 </p>
 
 <br>
