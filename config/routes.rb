@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     resources :runs
 
     get 'game_manager', to: 'game_manager#index'
+    get 'game_manager/:action', to: 'game_manager'
     
     get  'settings', to: 'settings#index'
     post 'settings', to: 'settings#update'

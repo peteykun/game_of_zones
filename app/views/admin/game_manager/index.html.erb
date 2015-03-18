@@ -1,6 +1,10 @@
 <h1>Game Manager</h1>
 <hr>
 
+<% if params[:notice] != nil %>
+  <div class="alert alert-success" role="alert"><b>Success!</b> <%= params[:notice] %></div>
+<% end %>
+
 <br>
 
 <div class="row">
@@ -18,7 +22,7 @@
   </div>
   <div class="col-xs-6 col-md-4">
     <br>
-    <%= link_to 'Start Game', '#', class: 'btn btn-success', style: 'width: 100%' %>
+    <%= link_to 'Start Game', '#', class: 'btn btn-success', style: 'width: 100%', onclick: 'alert("Not implemented yet!");' %>
   </div>
 </div>
 
@@ -28,9 +32,12 @@
   <div class="col-xs-12 col-md-8">
     <b>Manually change active zone</b>
     <p>In case the zone scheduler is not enabled or buggy, you can manually change the active zone.</p>
+
+    <p><i>Current zone:</i> <%= @current_zone.name %></p>
   </div>
   <div class="col-xs-6 col-md-4">
-    <%= link_to 'Change Active Zone', '#', class: 'btn btn-primary', style: 'width: 100%' %>
+    <br>
+    <%= link_to 'Change Active Zone', {controller: :game_manager, action: :change_active_zone}, class: 'btn btn-primary', style: 'width: 100%' %>
   </div>
 </div>
 
@@ -38,11 +45,14 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-8">
-    <b>Disable zone scheduler</b>
-    <p>Turn off the active zone scheduler.</p>
+    <b><%= if @zone_scheduler_enabled then 'Disable' else 'Enable' end %> zone scheduler</b>
+    <p>Toggle the state of the active zone scheduler.</p>
+
+    <p><i>Last run:</i> <%= @zone_scheduler_last_run %></p>
   </div>
   <div class="col-xs-6 col-md-4">
-    <%= link_to 'Disable zone scheduler', '#', class: 'btn btn-danger', style: 'width: 100%' %>
+    <br>
+    <%= link_to (if @zone_scheduler_enabled then 'Disable' else 'Enable' end) + ' zone scheduler', {controller: :game_manager, action: :toggle_scoring_scheduler}, class: 'btn btn-' + (if @zone_scheduler_enabled then 'danger' else 'success' end), style: 'width: 100%' %>
   </div>
 </div>
 
@@ -50,11 +60,14 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-8">
-    <b>Disable scoring scheduler</b>
-    <p>Turn off the scoring scheduler.</p>
+    <b><%= if @zone_scheduler_enabled then 'Disable' else 'Enable' end %> scoring scheduler</b>
+    <p>Toggle the state of the scoring scheduler.</p>
+
+    <p><i>Last run:</i> <%= @scoring_scheduler_last_run %></p>
   </div>
   <div class="col-xs-6 col-md-4">
-    <%= link_to 'Disable scoring scheduler', '#', class: 'btn btn-danger', style: 'width: 100%' %>
+    <br>
+    <%= link_to (if @scoring_scheduler_enabled then 'Disable' else 'Enable' end) + ' scoring scheduler', {controller: :game_manager, action: :toggle_zone_scheduler}, class: 'btn btn-' + (if @scoring_scheduler_enabled then 'danger' else 'success' end), style: 'width: 100%' %>
   </div>
 </div>
 
