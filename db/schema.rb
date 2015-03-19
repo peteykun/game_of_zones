@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318130133) do
+ActiveRecord::Schema.define(version: 20150319101239) do
 
   create_table "config_tables", force: true do |t|
     t.string   "key"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150318130133) do
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "past_level"
   end
 
   create_table "problems", force: true do |t|

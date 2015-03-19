@@ -4,7 +4,7 @@ namespace :timed_events do
 
     zone_scheduler_enabled    = ConfigTable.lookup('zone_scheduler_enabled')
 
-    if zone_scheduler_enabled == true
+    if zone_scheduler_enabled == 'true'
       regions = Region.all.order(:id)
       active_region = Region.find_by_active(true)
 
@@ -17,12 +17,13 @@ namespace :timed_events do
         j = i + 1
       end
 
-      Region.transaction do
-        regions[i].active = false
-        regions[j].active = true
+      Manifest.where(region: regions[j]).each do |m|
+        m.update(level: 0, past_level: m.level)
+      end
 
-        regions[i].save
-        regions[j].save
+      Region.transaction do
+        regions[i].update(active: false)
+        regions[j].update(active: true)
       end
 
       puts "#{regions[i].name} deactivated, #{regions[j].name} activated."
@@ -38,7 +39,7 @@ namespace :timed_events do
 
     scoring_scheduler_enabled = ConfigTable.lookup('scoring_scheduler_enabled')
 
-    if scoring_scheduler_enabled == true
+    if scoring_scheduler_enabled == 'true'
       current_zone  = Region.find_by_active(true)
 
       if current_zone == nil
@@ -49,7 +50,9 @@ namespace :timed_events do
       user  = current_zone.user
 
       if user != nil and current_zone != nil
-        level = Manifest.where(region: current_zone, user: user)[0].level
+        mani = Manifest.where(region: current_zone, user: user)[0]
+        level = mani.level
+        level = mani.past_level if level == 0 and mani.past_level != nil
 
         old_score = user.score
         user.score += level

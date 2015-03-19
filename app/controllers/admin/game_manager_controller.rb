@@ -43,12 +43,13 @@ class Admin::GameManagerController < ApplicationController
       j = i + 1
     end
 
-    Region.transaction do
-      regions[i].active = false
-      regions[j].active = true
+    Manifest.where(region: regions[j]).each do |m|
+      m.update(level: 0, past_level: m.level)
+    end
 
-      regions[i].save
-      regions[j].save
+    Region.transaction do
+      regions[i].update(active: false)
+      regions[j].update(active: true)
     end
 
     redirect_to action: 'index', notice: "#{regions[i].name} deactivated, #{regions[j].name} activated."

@@ -20,9 +20,11 @@
       <% if @active_zone.user == nil %>
       <b>Nobody</b> has been victorious against this gym leader yet!
       <% elsif @active_zone.user == current_user %>
-      <b>You</b>, a <b>Lv. <%= current_user.level(@active_zone) %></b> Trainer are in control of this zone!
+      <% level = current_user.level(@active_zone) %>
+      <b>You</b>, a <b><% if level == 0 %>Newbie<% else %>Lv. <%= level %><% end %></b> Trainer are in control of this zone!
       <% else %>
-      <b><%= @active_zone.user.username.titleize %></b>, a <b>Lv. <%= @active_zone.user.level(@active_zone) %></b> Trainer is in control of this zone!
+      <% level = @active_zone.user.level(@active_zone) %>
+      <b><%= @active_zone.user.username.titleize %></b>, a <b><% if level == 0 %>Newbie <% else %>Lv. <%= level %><% end %></b> Trainer is in control of this zone!
       <% end %><br><br>
 
       <b class="header">Challenge Info</b><br>
@@ -46,9 +48,11 @@
       <% if zone.user == nil %>
       <b>Nobody</b> has been victorious against this gym leader yet!
       <% elsif zone.user == current_user %>
-      <b>You</b>, a <b>Lv. <%= current_user.level(zone) %></b> Trainer are in control of this zone!
+      <% level = current_user.level(zone) %>
+      <b>You</b>, a <b><% if level == 0 %>Newbie<% else %>Lv. <%= level %><% end %></b> Trainer are in control of this zone!
       <% else %>
-      <b><%= zone.user.username.titleize %></b>, a <b>Lv. <%= zone.user.level(zone) %></b> Trainer is in control of this zone!
+      <% level = zone.user.level(zone) %>
+      <b><%= zone.user.username.titleize %></b>, a <b><% if level == 0 %>Newbie<% else %>Lv. <%= level %><% end %></b> Trainer is in control of this zone!
       <% end %><br><br>
 
       <b class="header">Challenge Info</b><br>
