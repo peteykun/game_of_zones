@@ -17,10 +17,65 @@ namespace :timed_events do
         j = i + 1
       end
 
+      # Reset user levels
+      max_level = Manifest.where(region: regions[j], user: regions[j].user)[0].level unless regions[j].user == nil
+
       Manifest.where(region: regions[j]).each do |m|
         m.update(level: 0, past_level: m.level)
       end
 
+      # Replace programs that have already been solved or seen
+      regions[j].problems.each do |p|
+        if (regions[j].user != nil and p.difficulty <= max_level + 1)
+          p.active = false
+
+          replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
+          
+          # ABORT AND ENTER PANIC MODE if you can't find a replacement
+          if replacement == nil
+            puts "Couldn't find Level #{p.difficulty} replacement."
+            break
+            # Program remains unchanged
+          end
+
+          replacement.region = p.region
+          replacement.active = true
+
+          Problem.transaction do
+            replacement.save
+            p.save
+          end
+
+          puts "Level #{p.difficulty} Problem #{p.name} replaced with #{replacement.name}."
+        end
+      end
+
+      # If nobody's solved anything, just replace the first program
+      if regions[j].user == nil
+        p = regions[j].problems.find_by_difficulty(1)
+        p.active = false
+
+        replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
+
+        # ABORT AND ENTER PANIC MODE if you can't find a replacement
+        unless replacement == nil
+          replacement.region = p.region
+          replacement.active = true
+
+          Problem.transaction do
+            replacement.save
+            p.save
+          end
+
+          puts "Level #{p.difficulty} Problem #{p.name} replaced with #{replacement.name}."
+        else
+          # DO NOTHING
+          # Program remains unchanged
+          puts "Couldn't find Level #{p.difficulty} replacement."
+        end
+      end
+
+      # Turn off the old region and turn on the new one
       Region.transaction do
         regions[i].update(active: false)
         regions[j].update(active: true)

@@ -1,0 +1,61 @@
+<h1>Game Status</h1>
+<hr>
+
+<% if @need.values.inject(:+) > 0 %>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Action Required</h3>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <% (1..@max_level).each do |level| %>
+        <% if @need[level] != 0 %>
+          <li><b>Level <%= level %>:</b> <%= @need[level] %> programs required, have <%= @have[level] %> of <%= @total[level] %>.</li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% else %>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">No Action Required</h3>
+  </div>
+  <div class="panel-body">
+    The system does not require any more programs right now.
+  </div>
+</div>
+<% end %>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <% @zones.each do |zone| %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading<%= zone.id %>">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= zone.id %>" aria-expanded="<% if zone == Region.first %>true<% else %>false<% end %>" aria-controls="collapse<%= zone.id %>"><%= zone.name %></a></h4>
+    </div>
+
+    <div id="collapse<%= zone.id %>" class="panel-collapse collapse<% if zone == Region.first %> in<% end %>" role="tabpanel" aria-labelledby="heading<%= zone.id %>">
+      <div class="panel-body">
+        <% if zone.active %>
+          <p>This zone is currently active.</p>
+        <% else %>
+          <% max_level = Manifest.where(region: zone, user: zone.user)[0].level unless zone.user == nil %>
+          <ul>
+            <% (1..@max_level).each do |level| %>
+            <li><b>Level <%= level %>:</b>
+              <% p = Problem.where(region: zone, difficulty: level)[0] %>
+              <% if zone.user == nil and level == 1 %>Seen
+              <% elsif zone.user == nil %>Will be reused
+              <% elsif p.difficulty < max_level + 1 %>Solved
+              <% elsif p.difficulty == max_level + 1 %>Seen
+              <% else %>Will be reused
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div> 
+  </div>
+  <% end %>
+</div>

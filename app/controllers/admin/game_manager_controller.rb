@@ -4,6 +4,75 @@ class Admin::GameManagerController < ApplicationController
   before_action :set_vars
 
   def index
+    @zones = Region.all.order(:id)
+    max_level_problem = Problem.order('difficulty DESC').first
+
+    if max_level_problem == nil
+      @max_level = 0
+    else
+      @max_level = max_level_problem.difficulty
+    end
+
+    @total = Hash.new(0)
+    @have  = Hash.new
+    @need  = Hash.new
+
+    @zones.where(active: false).each do |zone|
+      (1..@max_level).each do |level|
+        p = Problem.where(region: zone, difficulty: level)[0]
+
+        if zone.user == nil and level == 1
+          @total[level] +=1
+        elsif zone.user == nil
+          # do nothing
+        elsif p.difficulty <= @max_level + 1
+          @total[level] += 1
+        end
+
+      end
+    end
+
+    (1..@max_level).each do |level|
+      @have[level] = Problem.where(difficulty: level, active: nil).size
+      @need[level] = @total[level] - @have[level]
+      @need[level] = 0                                    if @need[level] < 0
+    end
+  end
+
+  def status
+    @zones = Region.all.order(:id)
+    max_level_problem = Problem.order('difficulty DESC').first
+
+    if max_level_problem == nil
+      @max_level = 0
+    else
+      @max_level = max_level_problem.difficulty
+    end
+
+    @total = Hash.new(0)
+    @have  = Hash.new
+    @need  = Hash.new
+
+    @zones.where(active: false).each do |zone|
+      (1..@max_level).each do |level|
+        p = Problem.where(region: zone, difficulty: level)[0]
+
+        if zone.user == nil and level == 1
+          @total[level] +=1
+        elsif zone.user == nil
+          # do nothing
+        elsif p.difficulty <= @max_level + 1
+          @total[level] += 1
+        end
+
+      end
+    end
+
+    (1..@max_level).each do |level|
+      @have[level] = Problem.where(difficulty: level, active: nil).size
+      @need[level] = @total[level] - @have[level]
+      @need[level] = 0                                    if @need[level] < 0
+    end
   end
 
   def toggle_zone_scheduler
@@ -43,16 +112,73 @@ class Admin::GameManagerController < ApplicationController
       j = i + 1
     end
 
+    # Reset user levels
+    max_level = Manifest.where(region: regions[j], user: regions[j].user)[0].level unless regions[j].user == nil
+
     Manifest.where(region: regions[j]).each do |m|
       m.update(level: 0, past_level: m.level)
     end
 
+    log = ''
+
+    # Replace programs that have already been solved or seen
+    regions[j].problems.each do |p|
+      if (regions[j].user != nil and p.difficulty <= max_level + 1)
+        p.active = false
+
+        replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
+
+        # ABORT AND ENTER PANIC MODE if you can't find a replacement
+        if replacement == nil
+          log += "Couldn't find Level #{p.difficulty} replacement.<br>"
+          break
+          # Program remains unchanged
+        end
+
+        replacement.region = p.region
+        replacement.active = true
+
+        Problem.transaction do
+          replacement.save
+          p.save
+        end
+      
+        log += "Level #{p.difficulty} Problem #{p.name} replaced with #{replacement.name}.<br>"
+      end
+    end
+
+    # If nobody's solved anything, just replace the first program
+    if regions[j].user == nil
+      p = regions[j].problems.find_by_difficulty(1)
+      p.active = false
+
+      replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
+
+      # ABORT AND ENTER PANIC MODE if you can't find a replacement
+      unless replacement == nil
+        replacement.region = p.region
+        replacement.active = true
+
+        Problem.transaction do
+          replacement.save
+          p.save
+        end
+        
+        log += "Level #{p.difficulty} Problem #{p.name} replaced with #{replacement.name}.<br>"
+      else
+        # DO NOTHING
+        # Program remains unchanged
+        log += "Couldn't find Level #{p.difficulty} replacement.<br>"
+      end
+    end
+
+    # Turn off the old region and turn on the new one
     Region.transaction do
       regions[i].update(active: false)
       regions[j].update(active: true)
     end
 
-    redirect_to action: 'index', notice: "#{regions[i].name} deactivated, #{regions[j].name} activated."
+    redirect_to action: 'index', notice: log + "#{regions[i].name} deactivated, #{regions[j].name} activated."
   end
 
   private

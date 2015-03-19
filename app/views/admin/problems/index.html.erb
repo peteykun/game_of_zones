@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Difficulty</th>
       <th>Region</th>
+      <th>Status</th>
       <th colspan="3" width="30%">Controls</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <td><%= problem.name %></td>
         <td><%= problem.difficulty %></td>
         <td><% if problem.region == nil %>Nowhere<% else %><%= problem.region.name %><% end %></td>
+        <td><% if problem.active == nil %>Unassigned<% elsif problem.active == true %>Active<% else %>Archived<% end %></td>
         <td>
           <%= link_to [:admin, problem] do %>
           <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> View

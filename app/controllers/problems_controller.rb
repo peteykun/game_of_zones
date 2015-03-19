@@ -12,7 +12,7 @@ class ProblemsController < ApplicationController
 
   # GET /problems
   def index
-    @problems = Problem.where(region: current_zone).order('difficulty ASC')
+    @problems = Problem.where(region: current_zone, active: true).order('difficulty ASC')
     @current_zone = current_zone
     @allowed_level = Manifest.where(user: current_user, region: current_zone)[0].level + 1
   end
@@ -86,12 +86,17 @@ class ProblemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or coenstraints between actions.
     def set_problem
       @problem = ::Problem.find(params[:id])
     end
 
     def check_if_allowed
+      if not @problem.active
+        redirect_to action: 'index', notice: 'This problem has been archived.'
+        return
+      end
+
       if @problem.region != current_zone
         redirect_to action: 'index', notice: 'This region is closed right now.'
         return

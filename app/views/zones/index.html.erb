@@ -31,7 +31,7 @@
       <% if @active_zone.problems.size == current_user.level(@active_zone) %>
       The gym leader whited out... Doesn't seem like he'll be back!
       <% else %>
-      <% prob = Problem.where(region: @active_zone, difficulty: current_user.level(@active_zone) + 1)[0] %>
+      <% prob = Problem.where(active: true, region: @active_zone, difficulty: current_user.level(@active_zone) + 1)[0] %>
       Take on the gym! Your <b>Lv. <%= current_user.level(@active_zone) + 1 %></b> Problem is <%= link_to truncate(prob.name, length: 17), prob %>.
       <% end %>
     </div>

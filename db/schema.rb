@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319101239) do
+ActiveRecord::Schema.define(version: 20150319103753) do
 
   create_table "config_tables", force: true do |t|
     t.string   "key"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150319101239) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.boolean  "active"
   end
 
   create_table "regions", force: true do |t|

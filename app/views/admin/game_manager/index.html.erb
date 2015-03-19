@@ -2,7 +2,7 @@
 <hr>
 
 <% if params[:notice] != nil %>
-  <div class="alert alert-success" role="alert"><b>Success!</b> <%= params[:notice] %></div>
+  <div class="alert alert-success" role="alert"><b>Success!</b> <%= raw params[:notice] %></div>
 <% end %>
 
 <br>
@@ -23,6 +23,24 @@
   <div class="col-xs-6 col-md-4">
     <br>
     <%= link_to 'Start Game', '#', class: 'btn btn-success', style: 'width: 100%', onclick: 'alert("Not implemented yet!");' %>
+  </div>
+</div>
+
+<br><br>
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <b>Monitor game status</b>
+    <p>
+      Check which problems will be recycled for the next round. Contains information about problems that are required by the system but are still missing on the back end.
+    </p>
+
+    <p><i>Current status:</i> <% if @need.values.inject(:+) > 0 %>Action Required<% else %>No Action Required<% end %></p>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <br>
+    <%= link_to 'Monitor Game Status', {controller: :game_manager, action: :status}, class: 'btn btn-primary', style: 'width: 100%' %>
   </div>
 </div>
 
