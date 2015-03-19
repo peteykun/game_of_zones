@@ -52,7 +52,7 @@
   </div>
   <div class="col-xs-6 col-md-4">
     <br>
-    <%= link_to (if @zone_scheduler_enabled then 'Disable' else 'Enable' end) + ' zone scheduler', {controller: :game_manager, action: :toggle_scoring_scheduler}, class: 'btn btn-' + (if @zone_scheduler_enabled then 'danger' else 'success' end), style: 'width: 100%' %>
+    <%= link_to (if @zone_scheduler_enabled then 'Disable' else 'Enable' end) + ' zone scheduler', {controller: :game_manager, action: :toggle_zone_scheduler}, class: 'btn btn-' + (if @zone_scheduler_enabled then 'danger' else 'success' end), style: 'width: 100%' %>
   </div>
 </div>
 
@@ -67,7 +67,7 @@
   </div>
   <div class="col-xs-6 col-md-4">
     <br>
-    <%= link_to (if @scoring_scheduler_enabled then 'Disable' else 'Enable' end) + ' scoring scheduler', {controller: :game_manager, action: :toggle_zone_scheduler}, class: 'btn btn-' + (if @scoring_scheduler_enabled then 'danger' else 'success' end), style: 'width: 100%' %>
+    <%= link_to (if @scoring_scheduler_enabled then 'Disable' else 'Enable' end) + ' scoring scheduler', {controller: :game_manager, action: :toggle_scoring_scheduler}, class: 'btn btn-' + (if @scoring_scheduler_enabled then 'danger' else 'success' end), style: 'width: 100%' %>
   </div>
 </div>
 
