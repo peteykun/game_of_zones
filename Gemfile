@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '~> 4.2.1'
 
 group :development do
   # Use sqlite3 as the database for Active Record
@@ -10,8 +10,10 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
-  gem 'rails_12factor'
+  # gem 'pg'
+  # gem 'rails_12factor'
+  gem 'tiny_tds'
+  gem 'activerecord-sqlserver-adapter', '~> 4.2.0'
 end
 
 # Use SCSS for stylesheets

@@ -23,5 +23,8 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlserver
+  host: <%= ENV['AZURE_HOST'] %>
+  database: <%= ENV['AZURE_DB'] %>
+  username: <%= ENV['AZURE_USERNAME'] %>
+  password: <%= ENV['AZURE_PASSWORD'] %>
