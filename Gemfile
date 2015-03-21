@@ -18,6 +18,7 @@ group :production do
   # Use sqlserver as the database for Active Record
   gem 'tiny_tds'
   gem 'activerecord-sqlserver-adapter', '~> 4.2.0'
+  gem 'passenger'
 end
 
 gem 'responders', '~> 2.0'
@@ -31,3 +32,4 @@ gem 'sprockets-rails', '>= 2.1.4', :require => 'sprockets/railtie'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
+gem 'whenever', :require => false
