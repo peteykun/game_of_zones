@@ -24,7 +24,13 @@ test:
 production:
   <<: *default
   adapter: sqlserver
-  host: <%= ENV['AZURE_HOST'] %>
-  database: <%= ENV['AZURE_DB'] %>
-  username: <%= ENV['AZURE_USERNAME'] %>
-  password: <%= ENV['AZURE_PASSWORD'] %>
+  mode: dblib
+  dataserver:
+  host: <%= ENV['AZURE_SERVER'] %>.database.windows.net
+  port: 1433
+  database: <%= ENV['AZURE_DB_NAME'] %>
+  username: <%= ENV['AZURE_DB_USER'] %>@<%= ENV['AZURE_SERVER'] %>
+  password: <%= ENV['AZURE_DB_PASS'] %>
+  timeout: 5000
+  azure : true
+
