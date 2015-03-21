@@ -28,7 +28,7 @@
       <% end %><br><br>
 
       <b class="header">Challenge Info</b><br>
-      <% if @active_zone.problems.size == current_user.level(@active_zone) %>
+      <% unless @active_zone.has_more_problems_for(current_user) %>
       The gym leader whited out... Doesn't seem like he'll be back!
       <% else %>
       <% prob = Problem.where(active: true, region: @active_zone, difficulty: current_user.level(@active_zone) + 1)[0] %>
@@ -56,7 +56,7 @@
       <% end %><br><br>
 
       <b class="header">Challenge Info</b><br>
-      <% if zone.problems.size == current_user.level(zone) %>
+      <% unless zone.has_more_problems_for(current_user) %>
       The gym leader whited out... Doesn't seem like he'll be back!
       <% else %>
       This gym leader seems to be away right now...

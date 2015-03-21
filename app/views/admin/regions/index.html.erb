@@ -37,6 +37,9 @@
   </tbody>
 </table>
 
+
+<%= will_paginate @problems, renderer: BootstrapPagination::Rails %>
+<br>
 <br>
 
 <%= link_to 'New Region', new_admin_region_path, class: 'btn btn-default', class: 'btn btn-default' %>

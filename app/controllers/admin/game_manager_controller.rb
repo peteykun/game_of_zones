@@ -39,6 +39,39 @@ class Admin::GameManagerController < ApplicationController
     end
   end
 
+  def start
+    max_level_problem = Problem.order('difficulty DESC').first
+
+    if max_level_problem == nil
+      @max_level = 0
+    else
+      @max_level = max_level_problem.difficulty
+    end
+
+    # Assign problems
+    Region.all.each do |r|
+      (1..@max_level).each do |level|
+        next if Problem.where(active: true, difficulty: level, region: r).size > 0
+        next if Problem.where(active: nil, difficulty: level).size == 0
+
+        p = Problem.where(active: nil, difficulty: level).sample
+        p.update(active: true)
+        r.problems << p
+      end
+
+      r.save
+    end
+
+    # Start schedulers
+    ConfigTable.set('zone_scheduler_enabled', 'true')
+    ConfigTable.set('scoring_scheduler_enabled', 'true')
+
+    # Set game started
+    ConfigTable.set('game_started', 'true')
+
+    redirect_to action: 'index'
+  end
+
   def status
     @zones = Region.all.order(:id)
     max_level_problem = Problem.order('difficulty DESC').first
@@ -185,6 +218,7 @@ class Admin::GameManagerController < ApplicationController
     def set_vars
       @zone_scheduler_enabled    = ConfigTable.lookup('zone_scheduler_enabled') == 'true'
       @scoring_scheduler_enabled = ConfigTable.lookup('scoring_scheduler_enabled') == 'true'
+      @game_active               = ConfigTable.lookup('game_started') == 'true'
 
       @current_zone               = current_zone
       @zone_scheduler_last_run    = ConfigTable.lookup('zone_scheduler_last_run')

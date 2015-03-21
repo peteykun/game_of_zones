@@ -25,5 +25,7 @@ module GameOfZones
     config.assets.enabled = true
     config.assets.paths << Rails.root.join('/app/assets/fonts')
     config.assets.paths << Rails.root.join('/app/assets/music')
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

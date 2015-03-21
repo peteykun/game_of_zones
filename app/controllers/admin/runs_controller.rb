@@ -6,7 +6,7 @@ class Admin::RunsController < ApplicationController
   # GET /runs
   # GET /runs.json
   def index
-    @runs = ::Run.all.order('id DESC')
+    @runs = ::Run.all.order('id DESC').paginate(page: params[:page], per_page: 10)
   end
 
   # GET /runs/1

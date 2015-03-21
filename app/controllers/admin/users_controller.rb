@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = ::User.all.order(:id)
+    @users = ::User.all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /users/1

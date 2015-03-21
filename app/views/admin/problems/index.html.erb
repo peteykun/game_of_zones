@@ -41,6 +41,8 @@
   </tbody>
 </table>
 
+<%= will_paginate @problems, renderer: BootstrapPagination::Rails %>
+<br>
 <br>
 
 <%= link_to 'New Problem', new_admin_problem_path, class: 'btn btn-default' %>

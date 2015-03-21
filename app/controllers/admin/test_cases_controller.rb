@@ -7,7 +7,7 @@ class Admin::TestCasesController < ApplicationController
   # GET /test_cases
   # GET /test_cases.json
   def index
-    @problems = ::Problem.all.order(:id)
+    @problems = ::Problem.all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /problems/new

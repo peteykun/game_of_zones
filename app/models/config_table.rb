@@ -9,9 +9,11 @@ class ConfigTable < ActiveRecord::Base
   def self.set(key, value)
     tuple = ConfigTable.find_by_key(key)
 
-    return false if tuple == nil
-    
-    tuple.value = value
-    return tuple.save
+    if tuple != nil
+      tuple.value = value
+      return tuple.save
+    else
+      return ConfigTable.create(key: key, value: value)
+    end
   end
 end
