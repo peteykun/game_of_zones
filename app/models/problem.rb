@@ -29,6 +29,11 @@ class Problem < ActiveRecord::Base
   end
 
   def test_case_inputs=(semicolon_separated_string)
+    # strip last semicolon if not a delimiter
+    if semicolon_separated_string[-1] == ';'
+      semicolon_separated_string = semicolon_separated_string[0..-2]
+    end
+
     @input_strings = semicolon_separated_string.split(/;[\r\n]+/)
   end
 
@@ -58,6 +63,11 @@ class Problem < ActiveRecord::Base
   end
 
   def test_case_outputs=(semicolon_separated_string)
+    # strip last semicolon if not a delimiter
+    if semicolon_separated_string[-1] == ';'
+      semicolon_separated_string = semicolon_separated_string[0..-2]
+    end
+
     @output_strings = semicolon_separated_string.split(/;[\r\n]+/)
 
     if @input_strings != nil
