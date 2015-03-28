@@ -5,12 +5,13 @@ class Run < ActiveRecord::Base
 	before_create         :default_values
 
   def generate_test_set(number_of_test_cases)
-    test_set    = self.problem.test_cases.sample(number_of_test_cases)
+    test_set      = self.problem.test_cases.sample(number_of_test_cases)
+    test_set_size = test_set.size
 
     input_set   = test_set.flat_map { |i| i.input }
     output_set  = test_set.flat_map { |i| i.output }
 
-    self.input           = number_of_test_cases.to_s + "\n" + input_set.join("\n")
+    self.input           = test_set_size.to_s + "\n" + input_set.join("\n")
     self.expected_output = output_set.join("\n")
   end
 

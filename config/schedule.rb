@@ -23,6 +23,6 @@ every 3.hours do
   rake "timed_events:next_zone"
 end
 
-every :minute do
+every 1.minutes do
   rake "timed_events:update_scores"
 end
