@@ -1,6 +1,6 @@
 class ZoneChangeMailer < ApplicationMailer
   default to: Proc.new { User.pluck(:email) },
-          from: "noreply@goz.edg.co.in"
+          from: "gameofzones@gmail.com"
 
   def zone_change_email(zone)
     @zone = zone

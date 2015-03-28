@@ -82,6 +82,7 @@ namespace :timed_events do
       end
 
       puts "#{regions[i].name} deactivated, #{regions[j].name} activated."
+      ZoneChangeMailer.zone_change_email(regions[j]).deliver_now
     else
       puts "Zone scheduler disabled."
     end
