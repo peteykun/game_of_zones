@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319103753) do
+ActiveRecord::Schema.define(version: 20150328101217) do
 
-  create_table "config_tables", force: true do |t|
+  create_table "config_tables", force: :cascade do |t|
     t.string   "key"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "manifests", force: true do |t|
+  create_table "manifests", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "region_id"
     t.integer  "level"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150319103753) do
     t.integer  "past_level"
   end
 
-  create_table "problems", force: true do |t|
+  create_table "problems", force: :cascade do |t|
     t.integer  "difficulty"
     t.text     "statement"
     t.text     "sample_input"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150319103753) do
     t.boolean  "active"
   end
 
-  create_table "regions", force: true do |t|
+  create_table "regions", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20150319103753) do
     t.integer  "rounds"
   end
 
-  create_table "runs", force: true do |t|
+  create_table "runs", force: :cascade do |t|
     t.integer  "problem_id"
     t.text     "code"
     t.text     "input"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150319103753) do
     t.boolean  "tested"
   end
 
-  create_table "test_cases", force: true do |t|
+  create_table "test_cases", force: :cascade do |t|
     t.integer  "problem_id"
     t.text     "input"
     t.text     "output"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20150319103753) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
     t.boolean  "is_admin"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20150319103753) do
     t.string   "name"
     t.string   "college"
     t.integer  "score"
+    t.string   "phone"
   end
 
 end

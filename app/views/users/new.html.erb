@@ -55,6 +55,14 @@
   <br>
 
   <div class="form-group">
+    <%= f.label :phone %>
+    <p>Please enter a valid phone number. You will be contacted via e-mail if you win.</p>
+    <%= f.number_field :phone, class: 'form-control' %>
+  </div>
+
+  <br>
+
+  <div class="form-group">
     <%= f.label :password %>
     <p>Please enter a reasonably secure password. It will not be stored raw, we promise.</p>
     <%= f.password_field :password, class: 'form-control' %>
