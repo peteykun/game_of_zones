@@ -11,14 +11,14 @@ ConfigTable.create(key: 'test_case_limit', value: 5)
 ConfigTable.create(key: 'submission_time_limit', value: 120)
 
 # Add regions
-Region.create(name: 'Pewter City',      x: 145, y: 175, active: true)
-Region.create(name: 'Cerulean City',    x: 445, y: 145, active: false)
-Region.create(name: 'Vermilion City',   x: 445, y: 325, active: false)
-Region.create(name: 'Celadon City',     x: 355, y: 235, active: false)
-Region.create(name: 'Fuchsia City',     x: 385, y: 415, active: false)
-Region.create(name: 'Saffron City',     x: 445, y: 235, active: false)
-Region.create(name: 'Cinnabar Island',  x: 145, y: 475, active: false)
-Region.create(name: 'Viridian City',    x: 145, y: 295, active: false)
+Region.create(name: 'Pewter City',      x: 145, y: 175, active: true,  seen: false)
+Region.create(name: 'Cerulean City',    x: 445, y: 145, active: false, seen: false)
+Region.create(name: 'Vermilion City',   x: 445, y: 325, active: false, seen: false)
+Region.create(name: 'Celadon City',     x: 355, y: 235, active: false, seen: false)
+Region.create(name: 'Fuchsia City',     x: 385, y: 415, active: false, seen: false)
+Region.create(name: 'Saffron City',     x: 445, y: 235, active: false, seen: false)
+Region.create(name: 'Cinnabar Island',  x: 145, y: 475, active: false, seen: false)
+Region.create(name: 'Viridian City',    x: 145, y: 295, active: false, seen: false)
 
 # Add a user
 u = User.create(username: 'petey', email: 'pt@live.in', password: 'mudkip', password_confirmation: 'mudkip', is_admin: true, college: 'Techno India', name: 'Soham Pal', score: 0, gender: 'male', phone: '9876453210')

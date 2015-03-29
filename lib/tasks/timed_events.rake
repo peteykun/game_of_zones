@@ -51,7 +51,7 @@ namespace :timed_events do
       end
 
       # If nobody's solved anything, just replace the first program
-      if regions[j].user == nil
+      if regions[j].user == nil and regions[j].seen == true
         p = regions[j].problems.find_by_difficulty(1)
         p.active = false
 
@@ -78,7 +78,7 @@ namespace :timed_events do
       # Turn off the old region and turn on the new one
       Region.transaction do
         regions[i].update(active: false)
-        regions[j].update(active: true)
+        regions[j].update(active: true, seen: true)
       end
 
       puts "#{regions[i].name} deactivated, #{regions[j].name} activated."

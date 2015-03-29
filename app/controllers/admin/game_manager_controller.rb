@@ -69,6 +69,9 @@ class Admin::GameManagerController < ApplicationController
     # Set game started
     ConfigTable.set('game_started', 'true')
 
+    # Set current zone as seen
+    current_zone.update(seen: true)
+
     redirect_to action: 'index'
   end
 
@@ -181,7 +184,7 @@ class Admin::GameManagerController < ApplicationController
     end
 
     # If nobody's solved anything, just replace the first program
-    if regions[j].user == nil
+    if regions[j].user == nil and regions[j].seen == true
       p = regions[j].problems.find_by_difficulty(1)
       p.active = false
 
@@ -208,7 +211,7 @@ class Admin::GameManagerController < ApplicationController
     # Turn off the old region and turn on the new one
     Region.transaction do
       regions[i].update(active: false)
-      regions[j].update(active: true)
+      regions[j].update(active: true, seen: true)
     end
 
     redirect_to action: 'index', notice: log + "#{regions[i].name} deactivated, #{regions[j].name} activated."

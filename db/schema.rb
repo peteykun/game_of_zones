@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329040307) do
+ActiveRecord::Schema.define(version: 20150329055719) do
 
   create_table "config_tables", force: :cascade do |t|
     t.string   "key"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150329040307) do
     t.integer  "x"
     t.integer  "y"
     t.integer  "rounds"
+    t.boolean  "seen"
   end
 
   create_table "runs", force: :cascade do |t|
