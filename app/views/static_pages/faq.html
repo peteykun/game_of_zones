@@ -1,0 +1,210 @@
+<h1>Frequently Asked Questions</h1>
+<hr><br>
+
+<h4>Compliation and Execution</h4><br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    When I compile my program on the Windows command prompt I get the error:<br>
+    <code>'&lt;filename&gt;' is not recognized as an internal or external command, operable program or batch file.</code>
+  </div>
+
+  <div class="panel-body">
+    <p>Your PATH variable is not set up properly. Please use <a href="http://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/" target="_blank">this guide</a> to set your PATH variable.</p>
+
+    <p>Default paths:</p>
+    <ul>
+      <li>Java (JDK 8): <code>C:\Program Files (x86)\Java\jdk1.8.0_40\bin</code></li>
+      <li>gcc and g++ (minGW): <code>C:\Program Files (x86)\CodeBlocks\MinGW\bin</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    How do I compile my code using the terminal or command prompt?
+  </div>
+
+  <div class="panel-body">
+    <b>On Windows</b>
+    <p>To compile code, you have to open command prompt in the working folder, you can do that by performing a <kbd><kbd>shift</kbd> + <kbd>right click</kbd></kbd> on a blank area inside Windows Explorer and selecting the context menu option <code>Open Command Window Here</code>. Alternatively, you can open the command prompt from the start menu and use <code>cd /d &lt;path&gt;</code>.</p>
+
+    <b>On Linux</b>
+    <p>Open a terminal and use <code>cd &lt;path&gt;</code> to change to directory or if you have the option of opening terminal in your right click context menu then select it from there.</p>
+
+    <p>Once you have your PATH variable set up properly, use:</p>
+    <ul>
+      <li>C: <code>gcc &lt;filename&gt;.c -o &lt;filename&gt;.exe</code></li>
+      <li>C++: <code>g++ &lt;filename&gt;.c -o &lt;filename&gt;.exe</code></li>
+      <li>Java: <code>javac &lt;class_name&gt;.java</code></li>
+    </ul>
+
+    <p>Finally, execute your program:</p>
+    <ul>
+      <li>C: <code>./&lt;filename&gt;.exe</code></li>
+      <li>C++: <code>./&lt;filename&gt;.exe</code></li>
+      <li>Java: <code>java &lt;ClassName&gt;</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    How should I provide my program the input? How should I save the output?
+  </div>
+
+  <div class="panel-body">
+    <p>While you can manually copy and paste the files provided to you, we encourage you to use I/O redirection.<br>To do this, simply use the following commands:</p>
+
+    <ul>
+      <li>C: <code>./&lt;filename&gt;.exe &lt; input.txt &gt; output.txt</code></li>
+      <li>C++: <code>./&lt;filename&gt;.exe &lt; input.txt &gt; output.txt</code></li>
+      <li>Java: <code>java &lt;ClassName&gt; &lt; input.txt &gt; output.txt</code></li>
+    </ul>
+
+    <p>where <code>input.txt</code> is the filename of the file provided to you and <code>output.txt</code> is the desired filename of the output file.</p>
+
+    <p>You can then select the file <code>output.txt</code> (and your source file, of course) on the submission page and press submit.</p>
+  </div>
+</div>
+
+<br>
+
+<h4>Scoring and Questions</h4>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    How are points calculated?
+  </div>
+
+  <div class="panel-body">
+    <p>Each person will start earning points on capturing a zone. The points earned is proportional to the level of the last question solved.</p>
+
+    <table class="table table-bordered table-hover" style="width: 400px;">
+      <thead>
+        <th style="width: 40%;">Level</th>
+        <th>Points earned per minute</th>
+      </thead>
+
+      <tr>
+        <td>1</td>
+        <td>100</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>200</td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>300</td>
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>400</td>
+      </tr>
+
+      <tr>
+        <td>5</td>
+        <td>500</td>
+      </tr>
+
+      <tr>
+        <td>6</td>
+        <td>600</td>
+      </tr>
+    </table>
+
+    <p>Points are only earned for a zone when that zone is active (i.e. it is open for users to solve questions in).</p>
+
+    <p>When a zone reopens, the last conqueror of the zone (from the previous day) will continue to be awarded the same points (for example <code>600 points/minute</code> if they were <code>Lv. 6</code>) until a new person attacks and solves a <code>Lv. 1 question</code>. Once a new <code>Lv. 1</code> question is solved, the participant to solve it first gets awarded <code>100 points/minute</code>, replacing the Lv. 6 conquerer from the previous day.</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Are the questions different for every day of the same zone?
+  </div>
+
+  <div class="panel-body">
+    <p>
+      Questions that have been solved or revealed the previous day will be replaced by new questions.<br>
+      Questions that were still locked <i>for all users</i> when the zone closed will not be replaced.
+    </p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Are the questions different for each person attacking the same zone?
+  </div>
+
+  <div class="panel-body">
+    <p>
+      No, all users attacking the same zone get same questions.
+    </p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    How many zones can be active at a time?
+  </div>
+
+  <div class="panel-body">
+    <p>
+      Only <b>one</b> zone is active at a time. The active zone will automatically be highlighted when you open the map page.<br>
+      Each zone is active for 3 hours. When a new zone is made active, we send out an email to notify all users.
+    </p>
+  </div>
+</div>
+
+<br>
+
+<h4>Other Questions</h4>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    I require urgent assistance. Who should I contact?
+  </div>
+
+  <div class="panel-body">
+    <p>
+      We have set up an IRC channel on the freenode network to help you out.<br>
+      Join <a href="irc://irc.freenode.net/computeaid">#ComputeAid @ irc.freenode.net</a> and feel free to ask us or just hang out.
+    </p>
+
+    <p>Alternatively, contact the event heads on the phone or on facebook:</p>
+
+    <ul>
+      <li><a href="http://facebook.com/Rohan.Sahay" target="_blank">Rohan Sahay</a></li>
+      <li><a href="http://facebook.com/soham" target="_blank">Soham Pal</a></li>
+    </ul>
+
+    <p>Check the EDGE website for phone numbers.</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    What is IRC? How do I use it?
+  </div>
+
+  <div class="panel-body">
+    <p>The easy way out is to use a web client:</p>
+
+    <ol>
+      <li>Go to <a href="http://webchat.freenode.net/?channels=%23computeaid&amp;uio=d4" target="_blank">http://webchat.freenode.net/</a>.</li>
+      <li>Select a nickname for your account.</li>
+      <li>Enter #computeaid as the channel.</li>
+      <li>Fill out the captcha (if any) and press connect.</li>
+    </ol>
+
+    <p>You can use an IRC client like <a href="http://mirc.com/" target="_blank">mIRC</a> (Windows only) or <a href="http://xchat.org/" target="_blank">XChat</a> if you feel like it.</p>
+  </div>
+</div>
+

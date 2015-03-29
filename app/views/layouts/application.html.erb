@@ -51,8 +51,11 @@
             <a href="<%= login_path %>?register=true">Register</a>
           </li>
           <%end %>
-          <li>
-            <a href="http://edg.co.in/content/pdfs/42.pdf" target="_blank">Event Rules</a>
+          <li<%= raw ' class="active"' if controller_name == "static_pages" and action_name == "faq" %>>
+            <a href="<%= faq_path %>">FAQ</a>
+          </li>
+          <li<%= raw ' class="active"' if controller_name == "static_pages" and action_name == "rules" %>>
+            <a href="<%= rules_path %>">Event Rules</a>
           </li>
           <% if current_user != nil %>
           <li>

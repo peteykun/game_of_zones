@@ -89,6 +89,9 @@ Rails.application.routes.draw do
   resources :runs
   resources :zones
   resources :sessions
+
+  get 'faq',   to: 'static_pages#faq'
+  get 'rules', to: 'static_pages#rules'
   
   get 'login',    to: 'sessions#new'
   get 'register', to: 'users#new'
