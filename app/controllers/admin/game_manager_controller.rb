@@ -158,7 +158,7 @@ class Admin::GameManagerController < ApplicationController
     log = ''
 
     # Replace programs that have already been solved or seen
-    regions[j].problems.each do |p|
+    regions[j].problems.where(active: true).each do |p|
       if (regions[j].users.size != 0 and p.difficulty <= max_level + 1)
         p.active = false
 
@@ -185,7 +185,7 @@ class Admin::GameManagerController < ApplicationController
 
     # If nobody's solved anything, just replace the first program
     if regions[j].users.size == 0 and regions[j].seen == true
-      p = regions[j].problems.find_by_difficulty(1)
+      p = regions[j].problems.where(active: true).find_by_difficulty(1)
       p.active = false
 
       replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
