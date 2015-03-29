@@ -17,7 +17,7 @@
       <tr>
         <td><%= region.id %></td>
         <td><%= region.name %></td>
-        <td><% if region.user == nil %>Nobody<% else %><%= region.user.email %><% end %></td>
+        <td><% if region.users.size == 0 %>Nobody<% else %><%= region.users.pluck(:username).map { |x| x.titleize }.join(', ') %><% end %></td>
         <td><%= region.seen %></td>
         <td>
           <%= link_to [:admin, region] do %>

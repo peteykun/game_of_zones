@@ -18,7 +18,7 @@ namespace :timed_events do
       end
 
       # Reset user levels
-      max_level = Manifest.where(region: regions[j], user: regions[j].user)[0].level unless regions[j].user == nil
+      max_level = Manifest.where(region: regions[j], user: regions[j].users.first)[0].level unless regions[j].users.size == 0
 
       Manifest.where(region: regions[j]).each do |m|
         m.update(level: 0, past_level: m.level)
@@ -26,7 +26,7 @@ namespace :timed_events do
 
       # Replace programs that have already been solved or seen
       regions[j].problems.each do |p|
-        if (regions[j].user != nil and p.difficulty <= max_level + 1)
+        if (regions[j].users.size != 0 and p.difficulty <= max_level + 1)
           p.active = false
 
           replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
@@ -51,7 +51,7 @@ namespace :timed_events do
       end
 
       # If nobody's solved anything, just replace the first program
-      if regions[j].user == nil and regions[j].seen == true
+      if regions[j].users.size == 0 and regions[j].seen == true
         p = regions[j].problems.find_by_difficulty(1)
         p.active = false
 
@@ -103,19 +103,22 @@ namespace :timed_events do
         return
       end
 
-      user  = current_zone.user
+      if current_zone != nil
+        current_zone.users.each do |user|
 
-      if user != nil and current_zone != nil
-        mani = Manifest.where(region: current_zone, user: user)[0]
-        level = mani.level
-        level = mani.past_level if level == 0 and mani.past_level != nil
+          mani = Manifest.where(region: current_zone, user: user)[0]
+          level = mani.level
+          level = mani.past_level if level == 0 and mani.past_level != nil
 
-        old_score = user.score
-        user.score += level
-        user.save
+          old_score = user.score
+          user.score += level
+          user.save
 
-        puts "Updated #{user.username.titleize}'s score from #{old_score} to #{user.score}."
-      else
+          puts "Updated #{user.username.titleize}'s score from #{old_score} to #{user.score}."
+        end
+      end
+
+      if current_zone.users.size == 0
         puts "No one in charge of zone #{current_zone.name}."
       end
     else

@@ -33,4 +33,3 @@ production:
   password: <%= ENV['AZURE_DB_PASS'] %>
   timeout: 5000
   azure : true
-

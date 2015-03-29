@@ -1,9 +1,8 @@
 class Region < ActiveRecord::Base
-  validates_presence_of  :name
-	belongs_to             :user
-	has_many               :problems
-  has_many               :manifests
-  has_many               :users, through: :manifests
+  validates_presence_of   :name
+  has_and_belongs_to_many :users
+	has_many                :problems
+  has_many                :manifests
 
   def level(user)
     m = Manifest.where(user: user, region: self)

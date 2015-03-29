@@ -39,13 +39,13 @@
         <% if zone.active %>
           <p>This zone is currently active.</p>
         <% else %>
-          <% max_level = Manifest.where(region: zone, user: zone.user)[0].level unless zone.user == nil %>
+          <% max_level = Manifest.where(region: zone, user: zone.users.first)[0].level unless zone.users.size == 0 %>
           <ul>
             <% (1..@max_level).each do |level| %>
             <li><b>Level <%= level %>:</b>
               <% p = Problem.where(region: zone, difficulty: level)[0] %>
-              <% if zone.user == nil and level == 1 %>Seen
-              <% elsif zone.user == nil %>Will be reused
+              <% if zone.users.size == 0 and level == 1 %>Seen
+              <% elsif zone.users.size == 0 %>Will be reused
               <% elsif p.difficulty < max_level + 1 %>Solved
               <% elsif p.difficulty == max_level + 1 %>Seen
               <% else %>Will be reused

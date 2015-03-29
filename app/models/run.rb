@@ -28,9 +28,19 @@ class Run < ActiveRecord::Base
       end
 
       r = self.problem.region
+      leaders_exist = false
 
-      if r.user == nil or m.level > r.level(r.user)
-        r.user = self.user
+      if r.users.where.not(id: self.user.id).size > 0     # IGNORE self.user in this calculation
+        leaders_exist = true
+        current_max_level = r.level(r.users.where.not(id: self.user.id).first)
+      end
+
+      if leaders_exist == false or m.level > current_max_level
+        r.users.clear
+        r.users << self.user
+        r.save
+      elsif m.level == current_max_level
+        r.users << self.user unless r.users.exists?(self.user)
         r.save
       end
     end

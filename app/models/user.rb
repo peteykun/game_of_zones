@@ -8,9 +8,8 @@ class User < ActiveRecord::Base
 	validates_uniqueness_of   :email, :username
   validates_numericality_of :phone
 	has_many                  :runs
-	has_many                  :regions
+	has_and_belongs_to_many   :regions
   has_many                  :manifests
-  has_many                  :regions, through: :manifests
 
 	has_secure_password
   attr_accessor :level

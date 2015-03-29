@@ -21,9 +21,9 @@ class Admin::GameManagerController < ApplicationController
       (1..@max_level).each do |level|
         p = Problem.where(region: zone, difficulty: level)[0]
 
-        if zone.user == nil and level == 1
-          @total[level] +=1
-        elsif zone.user == nil
+        if zone.users.size == 0 and level == 1
+          @total[level] += 1
+        elsif zone.users.size == 0
           # do nothing
         elsif p.difficulty <= @max_level + 1
           @total[level] += 1
@@ -93,9 +93,9 @@ class Admin::GameManagerController < ApplicationController
       (1..@max_level).each do |level|
         p = Problem.where(region: zone, difficulty: level)[0]
 
-        if zone.user == nil and level == 1
+        if zone.users.size == nil and level == 1
           @total[level] +=1
-        elsif zone.user == nil
+        elsif zone.users.size == nil
           # do nothing
         elsif p.difficulty <= @max_level + 1
           @total[level] += 1
@@ -149,7 +149,7 @@ class Admin::GameManagerController < ApplicationController
     end
 
     # Reset user levels
-    max_level = Manifest.where(region: regions[j], user: regions[j].user)[0].level unless regions[j].user == nil
+    max_level = Manifest.where(region: regions[j], user: regions[j].users.first)[0].level unless regions[j].users.size == 0
 
     Manifest.where(region: regions[j]).each do |m|
       m.update(level: 0, past_level: m.level)
@@ -159,7 +159,7 @@ class Admin::GameManagerController < ApplicationController
 
     # Replace programs that have already been solved or seen
     regions[j].problems.each do |p|
-      if (regions[j].user != nil and p.difficulty <= max_level + 1)
+      if (regions[j].users.size != 0 and p.difficulty <= max_level + 1)
         p.active = false
 
         replacement = Problem.where(active: nil, difficulty: p.difficulty)[0]
@@ -184,7 +184,7 @@ class Admin::GameManagerController < ApplicationController
     end
 
     # If nobody's solved anything, just replace the first program
-    if regions[j].user == nil and regions[j].seen == true
+    if regions[j].users.size == 0 and regions[j].seen == true
       p = regions[j].problems.find_by_difficulty(1)
       p.active = false
 
