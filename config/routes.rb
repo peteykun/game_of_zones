@@ -93,4 +93,9 @@ Rails.application.routes.draw do
   get 'login',    to: 'sessions#new'
   get 'register', to: 'users#new'
   get 'logout',   to: 'sessions#destroy'
+
+  get   'forgot_password', to: 'users#forgot_password'
+  post  'forgot_password', to: 'users#send_password_email'
+  get   'reset_password',  to: 'users#reset_password'
+  patch 'reset_password',  to: 'users#save_new_password'
 end
